@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنصة الجزائرية للتظاهرات العلمية - </title>
+    <style>
+        :root {
+            --primary-color: #006633;
+            --secondary-color: #d21034;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 0 20px;
+        }
+        
+        .header-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header-text h1, .header-text h2 {
+            margin: 5px 0;
+        }
+        
+        .header-text h1 {
+            color: var(--primary-color);
+            font-size: 22px;
+        }
+        
+        .header-text h2 {
+            color: var(--secondary-color);
+            font-size: 18px;
+        }
+        
+        .language-switcher {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .language-switcher button {
+            background: none;
+            border: 1px solid var(--primary-color);
+            padding: 5px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .language-switcher button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .registration-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px 15px;
+        }
+        
+        .form-group {
+            flex: 1 0 300px;
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--secondary-color);
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin-left: 5px;
+        }
+        
+        .captcha-section {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .captcha-code {
+            font-family: monospace;
+            font-size: 20px;
+            letter-spacing: 5px;
+            background-color: #e9e9e9;
+            padding: 10px;
+            display: inline-block;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #004d26;
+        }
+        
+        /* RTL specific styles */
+        body[dir="rtl"] {
+            text-align: right;
+        }
+        
+        body[dir="ltr"] {
+            text-align: left;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-group {
+                flex: 1 0 100%;
+            }
+            
+            .logo-section {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <header>
+        <div class="container">
+            <div class="logo-section">
+                <div class="logo"></div>
+            </div>
+  <div class="header-text">
+    <h1>الجمهورية الجزائرية الديمقراطية الشعبية</h1>
+    <h1>People's Democratic Republic of Algeria</h1>
+
+    <!-- These lines are now green -->
+    <h2 class="green-text" style="color:#006633; font-weight:700;">
+      وزارة التعليم العالي والبحث العلمي
+    </h2>
+    <h2 class="green-text" style="color:#006633; font-weight:700;">
+      Ministry of Higher Education and Scientific Research
+    </h2>
+
+
+                <h2 style="font-size:32px; font-weight:900; color:red#000000;">المنصة الجزائرية للتظاهرات العلمية</h2>
+                <h2 style="font-size:32px; font-weight:900; color:red#000000;">Algerian Platform for Scientific Events </h2>
+<h2 style="font-size:60px; font-weight:900; color:#000000;">-APSE-</h2>
+            </div>
+        </div>
+        
+    </header>
+
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Switcher</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Switcher container */
+    .language-switcher {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      display: inline-flex;
+      gap: 6px;
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: 6px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      direction: ltr;
+    }
+
+    .language-switcher button {
+      border: 0;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .language-switcher button.active {
+      background: #16a34a; /* green for active */
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .language-switcher button:not(.active):hover {
+      background: #f3f4f6;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Language switcher -->
+  <div class="language-switcher">
+    <button id="arabicBtn" class="active">العربية</button>
+    <button id="englishBtn">English</button>
+  </div>
+
+  <script>
+    const arBtn = document.getElementById('arabicBtn');
+    const enBtn = document.getElementById('englishBtn');
+
+    function setLang(lang) {
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      arBtn.classList.toggle('active', lang === 'ar');
+      enBtn.classList.toggle('active', lang === 'en');
+    }
+
+    arBtn.addEventListener('click', () => setLang('ar'));
+    enBtn.addEventListener('click', () => setLang('en'));
+  </script>
+</body>
+</html>
+
+
+        <div class="registration-form">
+            <!-- Arabic Form -->
+            <form id="arabicForm" class="form-content">
+                <h2 class="form-title"></h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lastNameAr" class="required">اللقب</label>
+                        <input type="text" id="lastNameAr" placeholder="دقيش " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstNameAr" class="required">الاسم</label>
+                        <input type="text" id="firstNameAr" placeholder="جمال" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="emailAr" class="required">البريد الإلكتروني</label>
+                    <input type="email" id="emailAr" placeholder="dekkiche27@hotmail.fr" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="passwordAr" class="required">كلمة السر</label>
+                        <input type="password" id="passwordAr" placeholder="••••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPasswordAr" class="required">تأكيد كلمة السر</label>
+                        <input type="password" id="confirmPasswordAr" placeholder="••••••••••" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">الدرجة العلمية</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="profileAr" value="professor" required>
+                            أستاذ جامعي
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="profileAr" value="researcher">
+                            باحث أكاديمي
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="profileAr" value="student">
+                            طالب
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="profileAr" value="other">
+                            أخرى
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fieldAr" class="required">الميدان</label>
+                    <select id="fieldAr" required>
+  <option value="">اختر الميدان</option>
+  <option value="sciences-technologies">علوم وتكنولوجيا</option>
+  <option value="sciences-of-matter">علوم المادة</option>
+  <option value="mathematics-computer-science">رياضيات واعلام آلي</option>
+  <option value="natural-life-sciences">علوم الطبيعة والحياة</option>
+  <option value="earth-universe-sciences">علوم الأرض والكون</option>
+  <option value="economic-commercial-management-sciences">علوم اقتصادية، والتسيير وعلوم تجارية</option>
+  <option value="law-political-science">حقوق وعلوم سياسية</option>
+  <option value="letters-foreign-languages">آداب ولغات أجنبية</option>
+  <option value="human-social-sciences">علوم إنسانية واجتماعية</option>
+  <option value="staps">علوم وتقنيات النشاطات البدنية والرياضية</option>
+  <option value="Arts">فنون</option>
+  <option value="arabic-language-literature">لغة وأدب عربي</option>
+  <option value="amazigh-language-culture">لغة وثقافة أمازيغية</option>
+  <option value="architecture-urban-planning-city-professions">هندسة معمارية،عمران ومهن المدينة</option>
+  <option value="health-sciences">علوم الصحة</option>
+</select>
+
+                </div>
+                
+                <!-- University select (Arabic + English) + foreign-university input + language/foreign logic -->
+<div class="form-group">
+  <label for="universitySelect" class="required">الجامعة / University</label>
+  <select id="universitySelect" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;">
+    <option value="">{ اختر / Select }</option>
+
+    <!-- ✳️ Each option has Arabic text as default, and data-en for English. -->
+    <option value="univ-skikda-20081955"
+            data-en="20th August 1955 University of Skikda">جامعة 20 أوت 1955 سكيكدة</option>
+    <option value="univ-bouira-akli-mohand-oulhadj"
+            data-en="Akli Mohand Oulhadj University of Bouira">جامعة البويرة – آكلي محند أولحاج</option>
+    <option value="univ-djelfa-ziane-achour"
+            data-en="Ziane Achour University of Djelfa">جامعة الجلفة – زيان عاشور</option>
+    <option value="univ-ghardaia"
+            data-en="University of Ghardaia">جامعة غرداية</option>
+    <option value="univ-khemis-miliana-djilali-bounaama"
+            data-en="Djilali Bounaama University of Khemis Miliana">جامعة خميس مليانة – الجيلالي بونعامة</option>
+    <option value="univ-media-yahia-fares"
+            data-en="Yahia Fares University of Médéa">جامعة المدية – يحي فارس</option>
+    <option value="usthb"
+            data-en="University of Science and Technology Houari Boumediene (USTHB)">جامعة الجزائر هواري بومدين للعلوم و التكنولوجيا</option>
+    <option value="univ-bejaia-abderrahmane-mira"
+            data-en="Abderrahmane Mira University of Béjaïa">جامعة بجاية – عبد الرحمان ميرة</option>
+    <option value="univ-boumerdes-mohamed-bougara"
+            data-en="M’hamed Bougara University of Boumerdès">جامعة بومرداس – محمد بوقرة</option>
+    <option value="univ-tizi-ouzou-mouloud-mammeri"
+            data-en="Mouloud Mammeri University of Tizi-Ouzou">جامعة تيزي وزو – مولود معمري</option>
+    <option value="univ-laghouat-ammar-telidji"
+            data-en="Amar Telidji University of Laghouat">جامعة الأغواط – عمار ثليجي</option>
+    <option value="univ-blida1-saad-dahlab"
+            data-en="Saad Dahlab University of Blida 1">جامعة البليدة 1 – سعد دحلب</option>
+    <option value="univ-blida2-lounici-ali"
+            data-en="Lounici Ali University of Blida 2">جامعة البليدة 2 – لونيسي علي</option>
+    <option value="univ-algiers1-benyoucef-benkhedda"
+            data-en="Benyoucef Benkhedda University of Algiers 1">جامعة الجزائر 1 – بن يوسف بن خدة</option>
+    <option value="univ-algiers2-abou-el-kacem-saadallah"
+            data-en="Abou El Kacem Saadallah University of Algiers 2">جامعة الجزائر 2 – أبوالقاسم سعد الله</option>
+    <option value="univ-algiers3-brahim-soltane-chaibout"
+            data-en="Brahim Soltane Chaibout University of Algiers 3">جامعة الجزائر 3 – ابراهيم سلطان شيبوط</option>
+    <option value="ufc"
+            data-en="University of Continuing Education (UFC)">جامعة التكوين المتواصل</option>
+    <option value="univ-tamanrasset"
+            data-en="University of Tamanrasset">جامعة تامنغست</option>
+    <option value="univ-jijel-mohamed-seddik-ben-yahia"
+            data-en="Mohamed Seddik Ben Yahia University of Jijel">جامعة جيجل – محمد الصديق بن يحي</option>
+    <option value="univ-tebessa-larbi-tebessi"
+            data-en="Larbi Tebessi University of Tebessa">جامعة تبسة – العربي التبسي</option>
+    <option value="univ-bordj-el-bachir-el-ibrahimi"
+            data-en="Mohamed El Bachir El Ibrahimi University of Bordj Bou Arreridj">جامعة برج بوعريريج – محمد البشير الإبراهيمي</option>
+    <option value="univ-el-tarf-chadli-bendjedid"
+            data-en="Chadli Bendjedid University of El Tarf">جامعة الطارف – الشاذلي بن جديد</option>
+    <option value="univ-khenchela-abbes-laghrour"
+            data-en="Abbes Laghrour University of Khenchela">جامعة خنشلة – عباس لغرور</option>
+    <option value="univ-oum-el-bouaghi-larbi-ben-mhidi"
+            data-en="Larbi Ben M’hidi University of Oum El Bouaghi">جامعة أم البواقي – العربي بن مهيدي</option>
+    <option value="univ-el-oued-hamma-lakhdar"
+            data-en="Hamma Lakhdar University of El Oued">جامعة الوادي – حمة لخضر</option>
+    <option value="univ-souk-ahras-messaadia"
+            data-en="Mohamed-Cherif Messaadia University of Souk Ahras">جامعة سوق أهراس – محمد الشريف مساعدية</option>
+    <option value="univ-annaba-badji-mokhtar"
+            data-en="Badji Mokhtar University of Annaba">جامعة عنابة – باجي مختار</option>
+    <option value="univ-guelma-8-may-1945"
+            data-en="8 May 1945 University of Guelma">جامعة قالمة – 08 ماي 1945</option>
+    <option value="univ-batna1-hadj-lakhdar"
+            data-en="Hadj Lakhdar University of Batna 1">جامعة باتنة 1 – الحاج لخضر</option>
+    <option value="univ-biskra-mohamed-khider"
+            data-en="Mohamed Khider University of Biskra">جامعة بسكرة – محمد خيضر</option>
+    <option value="univ-msila-mohamed-boudiaf"
+            data-en="Mohamed Boudiaf University of M’Sila">جامعة المسيلة – محمد بوضياف</option>
+    <option value="univ-ouargla-kasdi-merbah"
+            data-en="Kasdi Merbah University of Ouargla">جامعة ورقلة – قاصدي مرباح</option>
+    <option value="univ-constantine-islamic-emir-abdelkader"
+            data-en="Emir Abdelkader University of Islamic Sciences (Constantine)">جامعة قسنطينة للعلوم الإسلامية – الأمير عبد القادر</option>
+    <option value="univ-setif1-ferhat-abbas"
+            data-en="Ferhat Abbas University of Setif 1">جامعة سطيف 1 – فرحات عباس</option>
+    <option value="univ-setif2-lamine-debaghine"
+            data-en="Lamine Debaghine University of Setif 2">جامعة سطيف 2 – لمين دباغين</option>
+    <option value="univ-constantine1-freres-mentouri"
+            data-en="Frères Mentouri University of Constantine 1">جامعة قسنطينة 1 – الإخوة منتوري</option>
+    <option value="univ-constantine2-abdelhamid-mehri"
+            data-en="Abdelhamid Mehri University of Constantine 2">جامعة قسنطينة 2 – عبد الحميد مهري</option>
+    <option value="univ-constantine3-salah-boubnider"
+            data-en="Salah Boubnider University of Constantine 3">جامعة قسنطينة 3 – المجاهد صالح بوبنيدر</option>
+    <option value="univ-batna2-mustapha-ben-boulaid"
+            data-en="Mustapha Ben Boulaïd University of Batna 2">جامعة باتنة 2 – مصطفى بن بولعيد</option>
+    <option value="univ-bechar-tahri-mohamed"
+            data-en="Tahri Mohammed University of Béchar">جامعة طاهري محمد – بشار</option>
+    <option value="univ-mascara-mustapha-stambouli"
+            data-en="Mustapha Stambouli University of Mascara">جامعة مصطفى اسطمبولي – معسكر</option>
+    <option value="univ-saida-dr-moulay-tahar"
+            data-en="Dr Moulay Tahar University of Saïda">جامعة الدكتور مولاي الطاهر – سعيدة</option>
+    <option value="univ-tlemcen-abo-bekr-belkaid"
+            data-en="Abou Bekr Belkaid University of Tlemcen">جامعة أبو بكر بلقايد – تلمسان</option>
+    <option value="univ-adrar-ahmed-draia"
+            data-en="Ahmed Draïa University of Adrar">جامعة أحمد دراية – أدرار</option>
+    <option value="univ-tiaret-ibn-khaldoun"
+            data-en="Ibn Khaldoun University of Tiaret">جامعة بن خلدون – تيارت</option>
+    <option value="univ-sba-djillali-liabes"
+            data-en="Djillali Liabès University of Sidi Bel Abbès">جامعة جيلالي ليابس – سيدي بلعباس</option>
+    <option value="univ-mostaganem-abdelhamid-ibn-badis"
+            data-en="Abdelhamid Ibn Badis University of Mostaganem">جامعة عبد الحميد ابن باديس – مستغانم</option>
+    <option value="univ-oran1-ahmed-ben-bella"
+            data-en="Ahmed Ben Bella University of Oran 1 (Es Senia)">جامعة أحمد بن بلة – وهران 1 (السانية)</option>
+    <option value="usto-mb"
+            data-en="University of Science and Technology of Oran – Mohamed Boudiaf (USTO-MB)">جامعة العلوم والتكنولوجيا – محمد بوضياف (وهران)</option>
+    <option value="univ-oran2-mohamed-ben-ahmed"
+            data-en="Mohamed Ben Ahmed University of Oran 2">جامعة وهران 2 – محمد بن أحمد (الرائد سي موسى)</option>
+    <option value="univ-chlef-hassiba-ben-bouali"
+            data-en="Hassiba Ben Bouali University of Chlef">جامعة الشلف – حسيبة بن بوعلي</option>
+    <option value="univ-tissemsilt"
+            data-en="University of Tissemsilt">جامعة تيسمسيلت</option>
+    <option value="univ-ain-temouchent"
+            data-en="University of Aïn Témouchent">جامعة عين تموشنت</option>
+    <option value="univ-relizane"
+            data-en="University of Relizane">جامعة غليزان</option>
+    <!-- 👉 Continue adding the remaining schools/institutes the same way if needed -->
+  </select>
+</div>
+
+<!-- يظهر هذا الحقل فقط لغير الجزائريين -->
+<div class="form-group" id="foreignUniversityGroup" style="display:none;">
+  <label for="foreignUniversity">اسم الجامعة (للدول الأجنبية) / University name (if foreign)</label>
+  <input id="foreignUniversity" type="text" placeholder="اكتب اسم جامعتك / Type your university name"
+         style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;">
+</div>
+
+<script>
+  /* ==== 1) تبديل اللغة: يغيّر نص الخيارات بين العربية والإنجليزية ==== */
+  (function(){
+    const select = document.getElementById('universitySelect');
+    if(!select) return;
+
+    // Cache Arabic text once in data-ar, English already in data-en
+    Array.from(select.options).forEach(opt=>{
+      if(opt.dataset && opt.dataset.en){
+        if(!opt.dataset.ar) opt.dataset.ar = opt.textContent.trim();
+      }
+    });
+
+    function applyLang(lang){
+      const toEn = (lang === 'en');
+      Array.from(select.options).forEach(opt=>{
+        if(opt.dataset && opt.dataset.en){
+          opt.textContent = toEn ? opt.dataset.en : opt.dataset.ar;
+        }
+      });
+    }
+
+    // initial based on <html lang>
+    applyLang((document.documentElement.lang||'ar').toLowerCase().startsWith('en') ? 'en' : 'ar');
+
+    // Hook your existing language buttons if present
+    const arBtn = document.getElementById('arabicBtn');
+    const enBtn = document.getElementById('englishBtn');
+    arBtn && arBtn.addEventListener('click', ()=>applyLang('ar'));
+    enBtn && enBtn.addEventListener('click', ()=>applyLang('en'));
+  })();
+
+  /* ==== 2) إظهار خانة "جامعة أجنبية" عندما الدولة ليست الجزائر ==== */
+  (function(){
+    const foreignGroup = document.getElementById('foreignUniversityGroup');
+    if(!foreignGroup) return;
+
+    // Try both Arabic & English country selects if they exist in your page
+    const countryAr = document.getElementById('countryAr');
+    const countryEn = document.getElementById('countryEn');
+
+    function bind(sel){
+      if(!sel) return;
+      const toggle = () => {
+        const val = (sel.value || '').toLowerCase();
+        // show input if country is not Algeria
+        foreignGroup.style.display = (val && val !== 'algeria') ? '' : 'none';
+      };
+      sel.addEventListener('change', toggle);
+      toggle();
+    }
+
+    bind(countryAr);
+    bind(countryEn);
+  })();
+</script>
+
+                
+                <div class="form-group">
+                    <label for="gradeAr" class="required">الرتبة</label>
+                    <select id="gradeAr" required>
+                        <option value="">اختر الرتبة</option>
+                        <option value="professor">بروفيسور</option>
+                        <option value="associate-professor-a">أستاذ محاضر قسم أ</option>
+                        <option value="associate-professor-b">أستاذ محاضر قسم ب</option>
+                        <option value="assistant-professor-a">أستاذ مساعد قسم أ</option>
+                        <option value="other">أخرى</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="countryAr" class="required">الدولة</label>
+                    <select id="countryAr" required>
+                        <option value="">اختر الدولة</option>
+                        <option value="algeria">الجزائر</option>
+                        <option value="tunisia">تونس</option>
+                        <option value="morocco">المغرب</option>
+                        <option value="libya">ليبيا</option>
+                        <option value="egypt">مصر</option>
+                        <option value="saudi-arabia">السعودية</option>
+                        <option value="uae">الإمارات</option>
+                        <option value="qatar">قطر</option>
+                        <option value="kuwait">الكويت</option>
+                        <option value="oman">عمان</option>
+                        <option value="bahrain">البحرين</option>
+                        <option value="jordan">الأردن</option>
+                        <option value="lebanon">لبنان</option>
+                        <option value="syria">سوريا</option>
+                        <option value="iraq">العراق</option>
+                        <option value="yemen">اليمن</option>
+                        <option value="palestine">فلسطين</option>
+                        <option value="mauritania">موريتانيا</option>
+                        <option value="sudan">السودان</option>
+                        <option value="somalia">الصومال</option>
+                        <option value="djibouti">جيبوتي</option>
+                        <option value="comoros">جزر القمر</option>
+                        <option value="other">دولة أخرى</option>
+                    </select>
+                </div>
+                
+                < class="captcha-section">
+    <div class="captcha-header">
+        <span class="captcha-title">CAPTCHIA</span>
+        <div class="captcha-code">U3Fcv3</div>
+    </div>
+    <p class="captcha-instruction">Type the word above</p>
+    <div class="captcha-input-group">
+        <input type="text" class="captcha-input" placeholder="Enter the code" required>
+        <button type="button" class="verify-btn">Verify</button>
+    </div>
+
+                
+                <button type="submit" class="submit-btn">إنشاء حساب</button>
+            </form>
+
+            <!-- English Form -->
+            <form id="englishForm" class="form-content" style="display: none;">
+                <h2 class="form-title"></h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lastNameEn" class="required">Last Name</label>
+                        <input type="text" id="lastNameEn" placeholder="DEKKICHE" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstNameEn" class="required">First Name</label>
+                        <input type="text" id="firstNameEn" placeholder="Djamal" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="emailEn" class="required">Email</label>
+                    <input type="email" id="emailEn" placeholder="dekkiche27@hotmail.fr" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="passwordEn" class="required">Create a Password</label>
+                        <input type="password" id="passwordEn" placeholder="••••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPasswordEn" class="required">Confirm Your Password</label>
+                        <input type="password" id="confirmPasswordEn" placeholder="••••••••••" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Profile</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="profileEn" value="teacher" required>
+                            Teacher
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="profileEn" value="researcher">
+                            Researcher
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="profileEn" value="student">
+                            Student
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="profileEn" value="other">
+                            Other
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fieldEn" class="required">Field / Discipline</label>
+                    <select id="fieldEn" required>
+                        <option value="">Select Field</option>
+                        <option value="sciences-technologies">Sciences and Technologies</option>
+                        <option value="mathematics-computer">Mathematics and Computer Science</option>
+                        <option value="matter-sciences">Sciences of Matter</option>
+                        <option value="natural-life-sciences">Natural and Life Sciences</option>
+                        <option value="earth-universe-sciences">Earth and Universe Sciences</option>
+                        <option value="economic-management-sciences">Economic, Commercial and Management Sciences</option>
+                        <option value="law-political-science">Law and Political Science</option>
+                        <option value="letters-foreign-languages">Letters and Foreign Languages</option>
+                        <option value="human-social-sciences">Human and Social Sciences</option>
+                        <option value="staps">Sciences and Techniques of Physical and Sports Activities (STAPS)</option>
+                        <option value="arts">Arts</option>
+                        <option value="arabic-language-literature">Arabic Language and Literature</option>
+                        <option value="amazigh-language-culture">Amazigh Language and Culture</option>
+                        <option value="architecture-urban">Architecture, Urban Planning and City Professions</option>
+                        <option value="health-sciences">Health Sciences</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="universityEn" class="required">University Affiliation</label>
+                    <select id="universityEn" required>
+                        <option value="">Select University</option>
+                        <option value="usthb">University of Science and Technology Houari Boumediene (USTHB)</option>
+                        <option value="univ-alger1">Benyoucef Benkhedda University of Algiers 1</option>
+                        <option value="univ-alger2">Abou El Kacem Saadallah University of Algiers 2</option>
+                        <option value="univ-alger3">Brahim Soltane Chaibout University of Algiers 3</option>
+                        <option value="univ-constantine1">Frères Mentouri University of Constantine 1</option>
+                        <option value="univ-constantine2">Abdelhamid Mehri University of Constantine 2</option>
+                        <option value="univ-constantine3">Salah Boubnider University of Constantine 3</option>
+                        <option value="univ-oran1">Ahmed Ben Bella University of Oran 1 (Es Senia)</option>
+                        <option value="univ-oran2">Mohamed Ben Ahmed University of Oran 2 (El A'raed Si Moussa)</option>
+                        <option value="univ-batna1">Hadj Lakhdar University of Batna 1</option>
+                        <option value="univ-batna2">Mustapha Ben Boulaïd University of Batna 2</option>
+                        <option value="univ-setif1">Ferhat Abbas University of Setif 1</option>
+                        <option value="univ-setif2">Lamine Debaghine University of Setif 2</option>
+                        <option value="univ-biskra">Mohamed Khider University of Biskra</option>
+                        <option value="univ-boumerdes">M'Hamed Bougara University of Boumerdes</option>
+                        <option value="univ-tlemcen">Abou Bekr Belkaid University of Tlemcen</option>
+                        <option value="univ-bejaia">Abderrahmane Mira University of Bejaia</option>
+                        <option value="univ-annaba">Badji Mokhtar University of Annaba</option>
+                        <option value="univ-blida1">Saad Dahlab University of Blida 1</option>
+                        <option value="univ-blida2">Lounici Ali University of Blida 2</option>
+                        <option value="univ-skikda">20th August 1955 University of Skikda</option>
+                        <option value="univ-guelma">8th May 1945 University of Guelma</option>
+                        <option value="univ-mostaganem">Abdelhamid Ibn Badis University of Mostaganem</option>
+                        <option value="univ-tiziouzou">Mouloud Mammeri University of Tizi-Ouzou</option>
+                        <option value="univ-msila">Mohamed Boudiaf University of M'Sila</option>
+                        <option value="univ-jijel">Mohamed Seddik Ben Yahia University of Jijel</option>
+                        <option value="univ-saida">Dr Moulay Tahar University of Saïda</option>
+                        <option value="univ-khenchela">Abbas Laghrour University of Khenchela</option>
+                        <option value="univ-laghouat">Amar Telidji University of Laghouat</option>
+                        <option value="univ-bouira">Akli Mohand Oulhadj University of Bouira</option>
+                        <option value="univ-adrar">Ahmed Draïa University of Adrar</option>
+                        <option value="univ-tiaret">Ibn Khaldoun University of Tiaret</option>
+                        <option value="univ-sba">Djillali Liabès University of Sidi Bel Abbès</option>
+                        <option value="univ-ouargla">Kasdi Merbah University of Ouargla</option>
+                        <option value="univ-eloued">Hamma Lakhdar University of El Oued</option>
+                        <option value="univ-ghardaia">University of Ghardaia</option>
+                        <option value="univ-tebessa">Larbi Tebessi University of Tebessa</option>
+                        <option value="univ-soukahras">Mohamed-Cherif Messaadia University of Souk Ahras</option>
+                        <option value="univ-mascara">Mustapha Stambouli University of Mascara</option>
+                        <option value="univ-bechar">Tahri Mohamed University of Béchar</option>
+                        <option value="univ-aintemouchent">University of Ain Temouchent</option>
+                        <option value="univ-relizane">University of Relizane</option>
+                        <option value="univ-tissemsilt">University of Tissemsilt</option>
+                        <option value="univ-djelfa">Ziane Achour University of Djelfa</option>
+                        <option value="univ-mila">University Center - Mila</option>
+                        <option value="univ-naama">University Center - Naama</option>
+                        <option value="univ-elbayadh">University Center - El Bayadh</option>
+                        <option value="univ-illizi">University Center - Illizi</option>
+                        <option value="univ-tindouf">University Center - Tindouf</option>
+                        <option value="univ-tipaza">University Center - Tipaza</option>
+                        <option value="univ-maghnia">University Center - Maghnia</option>
+                        <option value="univ-brika">University Center - Brika</option>
+                        <option value="univ-aflou">University Center - Aflou</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gradeEn" class="required">Grade</label>
+                    <select id="gradeEn" required>
+                        <option value="">Select Grade</option>
+                        <option value="professor">Professor</option>
+                        <option value="associate-professor-a">Associate Professor (Class A) — MCA</option>
+                        <option value="associate-professor-b">Associate Professor (Class B)</option>
+                        <option value="assistant-professor-a">Assistant Professor (Class A)</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="countryEn" class="required">Country</label>
+                    <select id="countryEn" required>
+                        <option value="">Select Country</option>
+                        <option value="algeria">Algeria</option>
+                        <option value="tunisia">Tunisia</option>
+                        <option value="morocco">Morocco</option>
+                        <option value="libya">Libya</option>
+                        <option value="egypt">Egypt</option>
+                        <option value="saudi-arabia">Saudi Arabia</option>
+                        <option value="uae">United Arab Emirates</option>
+                        <option value="qatar">Qatar</option>
+                        <option value="kuwait">Kuwait</option>
+                        <option value="oman">Oman</option>
+                        <option value="bahrain">Bahrain</option>
+                        <option value="jordan">Jordan</option>
+                        <option value="lebanon">Lebanon</option>
+                        <option value="syria">Syria</option>
+                        <option value="iraq">Iraq</option>
+                        <option value="yemen">Yemen</option>
+                        <option value="palestine">Palestine</option>
+                        <option value="mauritania">Mauritania</option>
+                        <option value="sudan">Sudan</option>
+                        <option value="somalia">Somalia</option>
+                        <option value="djibouti">Djibouti</option>
+                        <option value="comoros">Comoros</option>
+                        <option value="other">Other Country</option>
+                    </select>
+                </div>
+                
+                <!-- REPLACE your old .captcha-section block with this -->
+<div class="captcha-section" style="padding:14px; border-radius:10px; background:#fafafa; border:1px solid #e6e6e6; max-width:520px;">
+  <p></p>
+  <p>Confirm that you are not a robot</p>
+
+  <!-- Visible textual code (keeps compatibility with your current layout) -->
+  <p id="captchaCodeLabel">Code: <strong id="captchaRaw">U3Fcv3</strong></p>
+
+  <!-- Canvas "photo" CAPTCHA -->
+  <div style="display:flex;align-items:center;gap:10px;margin:10px 0;">
+    <canvas id="captchaCanvas" width="220" height="70" style="border-radius:8px; border:1px dashed #ddd; background:#fff; box-shadow:0 4px 10px rgba(0,0,0,0.04);"></canvas>
+    <button type="button" id="captchaRefresh" title="Refresh CAPTCHA" style="padding:8px 10px;border-radius:8px;border:1px solid #e6e6e6;background:#f3f4f6;cursor:pointer;">↻</button>
+  </div>
+
+  <!-- Text input (keeps your original required attribute) -->
+  <input id="captchaInput" type="text" placeholder="Enter the code above" required style="width:100%; padding:10px 12px; border:1px solid #e6e6e6; border-radius:8px; font-size:14px;">
+
+  <div id="captchaMsg" aria-live="polite" style="margin-top:8px; font-weight:600;"></div>
+</div>
+
+<script>
+(function(){
+  // --- CONFIG ---
+  const CHARSET = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"; // avoid ambiguous chars
+  const LENGTH = 6;
+  const canvas = document.getElementById('captchaCanvas');
+  const ctx = canvas.getContext('2d');
+  const rawEl = document.getElementById('captchaRaw');
+  const refreshBtn = document.getElementById('captchaRefresh');
+  const input = document.getElementById('captchaInput');
+  const msg = document.getElementById('captchaMsg');
+
+  let currentCode = 'U3Fcv3';
+
+  // utility
+  function randInt(n){ return Math.floor(Math.random()*n); }
+  function randRange(a,b){ return a + Math.random()*(b-a); }
+
+  // generate code
+  function makeCode(len=LENGTH){
+    let s = '';
+    for(let i=0;i<len;i++) s += CHARSET[randInt(CHARSET.length)];
+    return s;
+  }
+
+  // draw background gradient + noise
+  function drawBackground(){
+    const w = canvas.width, h = canvas.height;
+    // soft gradient
+    const g = ctx.createLinearGradient(0,0,w,h);
+    g.addColorStop(0, '#ffffff');
+    g.addColorStop(1, '#f7fbff');
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,w,h);
+
+    // subtle textured noise: diagonal lines
+    for(let i=0;i<8;i++){
+      ctx.beginPath();
+      ctx.moveTo(randInt(w), randInt(h));
+      ctx.lineTo(randInt(w), randInt(h));
+      ctx.strokeStyle = `rgba(${randInt(120)},${randInt(160)},${randInt(200)},${(Math.random()*0.12+0.03).toFixed(2)})`;
+      ctx.lineWidth = randRange(0.6,1.6);
+      ctx.stroke();
+    }
+
+    // random dots
+    for(let i=0;i<40;i++){
+      ctx.fillStyle = `rgba(${randInt(200)},${randInt(200)},${randInt(200)},${(Math.random()*0.18+0.03).toFixed(2)})`;
+      ctx.beginPath();
+      ctx.arc(randInt(w), randInt(h), Math.random()*1.8+0.6, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  // draw the code characters as a "photo"
+  function drawCode(code){
+    const w = canvas.width, h = canvas.height;
+    const cx = w/2;
+    const baseline = h/2 + 6;
+    ctx.textBaseline = 'middle';
+
+    // choose palette (accessible colors)
+    const palette = ['#0ea5e9','#22c55e','#ef4444','#a855f7','#f59e0b','#06b6d4','#f97316'];
+
+    // draw each char with variation
+    const gap = w / (code.length + 1);
+    for(let i=0;i<code.length;i++){
+      const ch = code[i];
+      const fontSize = Math.round(randRange(28,36));
+      ctx.font = `${fontSize}px "Segoe UI", Roboto, Arial, sans-serif`;
+      const x = gap*(i+1) + randRange(-6,6);
+      const y = baseline + randRange(-6,6);
+      const angle = randRange(-0.35, 0.35); // radians
+
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+
+      // fill with linear gradient for each char
+      const g = ctx.createLinearGradient(-10, -fontSize/2, 10, fontSize/2);
+      const col = palette[randInt(palette.length)];
+      g.addColorStop(0, lighten(col, 0.15));
+      g.addColorStop(1, darken(col, 0.05));
+      ctx.fillStyle = g;
+
+      // subtle shadow to mimic photo/emboss
+      ctx.shadowColor = 'rgba(0,0,0,0.08)';
+      ctx.shadowBlur = 2;
+      ctx.fillText(ch, -ctx.measureText(ch).width/2, 0);
+
+      ctx.restore();
+    }
+  }
+
+  // add interfering curves for realism
+  function addInterference(){
+    const w = canvas.width, h = canvas.height;
+    for(let i=0;i<3;i++){
+      ctx.beginPath();
+      ctx.moveTo(randInt(w), randInt(h));
+      for(let j=0;j<4;j++){
+        ctx.quadraticCurveTo(randInt(w), randInt(h), randInt(w), randInt(h));
+      }
+      ctx.strokeStyle = `rgba(${randInt(90)},${randInt(140)},${randInt(180)},${(Math.random()*0.25+0.08).toFixed(2)})`;
+      ctx.lineWidth = randRange(0.8,2.2);
+      ctx.stroke();
+    }
+  }
+
+  // small helper functions to lighten/darken hex colors
+  function hexToRgb(hex){
+    hex = hex.replace('#','');
+    if(hex.length===3) hex = hex.split('').map(c=>c+c).join('');
+    const v = parseInt(hex,16);
+    return {r:(v>>16)&255, g:(v>>8)&255, b:v&255};
+  }
+  function rgbToHex(r,g,b){
+    return '#' + [r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+  }
+  function lighten(hex, amt){
+    const c = hexToRgb(hex);
+    const r = Math.min(255, Math.round(c.r + 255*amt));
+    const g = Math.min(255, Math.round(c.g + 255*amt));
+    const b = Math.min(255, Math.round(c.b + 255*amt));
+    return rgbToHex(r,g,b);
+  }
+  function darken(hex, amt){
+    const c = hexToRgb(hex);
+    const r = Math.max(0, Math.round(c.r - 255*amt));
+    const g = Math.max(0, Math.round(c.g - 255*amt));
+    const b = Math.max(0, Math.round(c.b - 255*amt));
+    return rgbToHex(r,g,b);
+  }
+
+  // central render
+  function renderCaptcha(code){
+    // clear
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    drawBackground();
+    drawCode(code);
+    addInterference();
+
+    // tiny pixel noise overlay to feel "photo"
+    const imgData = ctx.getImageData(0,0,canvas.width,canvas.height);
+    for(let i=0;i<300;i++){
+      const idx = (Math.floor(Math.random()*imgData.data.length/4))*4;
+      imgData.data[idx] = Math.min(255, imgData.data[idx] + randInt(20));
+    }
+    ctx.putImageData(imgData, 0, 0);
+  }
+
+  // public refresh
+  function refresh(){
+    currentCode = makeCode();
+    // update textual "Code:" display (keeps old UI expectations)
+    rawEl.textContent = currentCode;
+    // render new canvas "photo"
+    renderCaptcha(currentCode);
+    // clear input & message
+    input.value = '';
+    msg.textContent = '';
+  }
+
+  // verification helper (used elsewhere in your form logic)
+  function verify(){
+    const typed = (input.value || '').replace(/\s+/g,'');
+    if(!typed) { msg.textContent = ''; return false; }
+    if(typed === currentCode){
+      msg.textContent = 'Verified ✅';
+      msg.style.color = '#15803d';
+      return true;
+    } else {
+      msg.textContent = 'Invalid code — try again.';
+      msg.style.color = '#b91c1c';
+      return false;
+    }
+  }
+
+  // initial draw; keep legacy example visible briefly then refresh
+  renderCaptcha(currentCode);
+
+  // If your original markup had "U3Fcv3" as initial code, reflect it first then immediately refresh
+  rawEl.textContent = currentCode;
+
+  // events
+  refreshBtn.addEventListener('click', refresh);
+  input.addEventListener('input', ()=>{ msg.textContent = ''; });
+
+  // expose verify function to parent form submission if needed:
+  // Example: in your form submit handler call window.captchaVerify() and block submit when false.
+  window.captchaVerify = verify;
+
+  // Auto-refresh once to replace initial demo code with a generated one
+  setTimeout(refresh, 250);
+
+})();
+</script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const arabicBtn = document.getElementById('arabicBtn');
+            const englishBtn = document.getElementById('englishBtn');
+            const arabicForm = document.getElementById('arabicForm');
+            const englishForm = document.getElementById('englishForm');
+            const body = document.body;
+            
+            arabicBtn.addEventListener('click', function() {
+                arabicForm.style.display = 'block';
+                englishForm.style.display = 'none';
+                arabicBtn.classList.add('active');
+                englishBtn.classList.remove('active');
+                body.dir = 'rtl';
+            });
+            
+            englishBtn.addEventListener('click', function() {
+                arabicForm.style.display = 'none';
+                englishForm.style.display = 'block';
+                englishBtn.classList.add('active');
+                arabicBtn.classList.remove('active');
+                body.dir = 'ltr';
+            });
+
+
+            
+            
+            // Form submission handling
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Here you would normally handle form submission
+                    alert('Form submitted successfully!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
