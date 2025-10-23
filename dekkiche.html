@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنصة الجزائرية للفعاليات العلمية (APSE)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #006633;
+            --secondary: #D21034;
+            --accent: #FFC107;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --light-green: #e8f5e9;
+            --light-red: #ffebee;
+            --light-blue: #e3f2fd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), #004d26);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 12px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .title-section h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .title-section h2 {
+            font-size: 16px;
+            font-weight: normal;
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            flex: 0 0 250px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+        }
+        
+        .content {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 25px;
+        }
+        
+        /* Section Styles */
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 20px;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 102, 51, 0.2);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .checkbox-item.checked {
+            background-color: var(--light-green);
+            border-color: var(--primary);
+        }
+        
+        .file-upload {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .file-btn:hover {
+            background-color: #004d26;
+        }
+        
+        .file-name {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .date-inputs {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .date-inputs .form-control {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 20px auto 0;
+            font-weight: bold;
+        }
+        
+        .submit-btn:hover {
+            background-color: #a50d2a;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 30px 0;
+        }
+        
+        /* Search Section */
+        .search-section {
+            background-color: var(--light-blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .search-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-item {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 0 0 auto;
+            }
+            
+            .date-inputs {
+                flex-direction: column;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+        
+        /* Subscript for specific fields */
+        sub {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        /* Download buttons */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin-right: 10px;
+            transition: background 0.3s;
+        }
+        
+        .download-btn:hover {
+            background-color: #004d26;
+            color: white;
+        }
+        
+        /* Hidden elements for English version */
+        .english-only {
+            display: none;
+        }
+        
+        /* Show English elements when body has english class */
+        body.english .arabic-only {
+            display: none;
+        }
+        
+        body.english .english-only {
+            display: block;
+        }
+        
+        body.english .content {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        body.english .sidebar {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        body.english header {
+            direction: ltr;
+        }
+        
+        body.english footer {
+            direction: ltr;
+        }
+        
+        /* Decision section */
+        .decision-section {
+            background-color: var(--light-green);
+            border-left-color: var(--secondary);
+        }
+        
+        /* Alert messages */
+        .alert {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .alert-success {
+            background-color: var(--light-green);
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .alert-error {
+            background-color: var(--light-red);
+            color: var(--secondary);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        /* Status indicators */
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-approved {
+            background-color: var(--light-green);
+            color: var(--primary);
+        }
+        
+        .status-rejected {
+            background-color: var(--light-red);
+            color: var(--secondary);
+        }
+        
+        /* Custom date input */
+        .date-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        /* Radio group styling */
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .radio-item.selected {
+            background-color: var(--light-green);
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body class="arabic">
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">APSE<br>المنصة الجزائرية</div>
+                    <div class="title-section">
+                        <h1 class="arabic-only">الجمهورية الجزائرية الديمقراطية الشعبية</h1>
+                        <h2 class="arabic-only">وزارة التعليم العالي والبحث العلمي</h2>
+                        
+                        <h1 class="english-only">People's Democratic Republic of Algeria</h1>
+                        <h2 class="english-only">Ministry of Higher Education and Scientific Research</h2>
+                    </div>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn active" id="arabic-btn">العربية</button>
+                    <button class="lang-btn" id="english-btn">English</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <aside class="sidebar">
+                <h3 class="arabic-only" style="color: var(--primary); margin-bottom: 15px;">إدارة الفعاليات العلمية</h3>
+                <h3 class="english-only" style="color: var(--primary); margin-bottom: 15px;">Event Management</h3>
+                
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 10px; padding: 8px 0; border-bottom: 1px solid #eee;">
+                        <a href="#" style="text-decoration: none; color: var(--dark); display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-plus-circle" style="color: var(--primary);"></i> 
+                            <span class="arabic-only">إنشاء فعالية جديدة</span>
+                            <span class="english-only">Create New Event</span>
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px; padding: 8px 0; border-bottom: 1px solid #eee;">
+                        <a href="#" style="text-decoration: none; color: var(--dark); display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-calendar-alt" style="color: var(--primary);"></i> 
+                            <span class="arabic-only">فعالياتي</span>
+                            <span class="english-only">My Events</span>
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px; padding: 8px 0; border-bottom: 1px solid #eee;">
+                        <a href="#" style="text-decoration: none; color: var(--dark); display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-search" style="color: var(--primary);"></i> 
+                            <span class="arabic-only">البحث في الأرشيف</span>
+                            <span class="english-only">Search Archive</span>
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px; padding: 8px 0; border-bottom: 1px solid #eee;">
+                        <a href="#" style="text-decoration: none; color: var(--dark); display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-cog" style="color: var(--primary);"></i> 
+                            <span class="arabic-only">الإعدادات</span>
+                            <span class="english-only">Settings</span>
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px; padding: 8px 0; border-bottom: 1px solid #eee;">
+                        <a href="#" style="text-decoration: none; color: var(--dark); display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-question-circle" style="color: var(--primary);"></i> 
+                            <span class="arabic-only">المساعدة</span>
+                            <span class="english-only">Help</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div style="margin-top: 30px; padding: 15px; background-color: var(--light-blue); border-radius: 8px;">
+                    <h4 class="arabic-only" style="color: var(--primary); margin-bottom: 10px;">حالة الفعالية</h4>
+                    <h4 class="english-only" style="color: var(--primary); margin-bottom: 10px;">Event Status</h4>
+                    
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <div class="status status-pending">قيد المراجعة</div>
+                        <div class="english-only" style="font-size: 12px;">Under Review</div>
+                    </div>
+                    
+                    <div class="arabic-only" style="font-size: 14px; color: var(--gray);">
+                        تم تقديم طلبك وهو قيد المراجعة من قبل اللجنة العلمية
+                    </div>
+                    <div class="english-only" style="font-size: 14px; color: var(--gray);">
+                        Your submission is under review by the scientific committee
+                    </div>
+                </div>
+            </aside>
+
+            <main class="content">
+                <!-- Alert Messages -->
+                <div class="alert alert-success" id="success-alert">
+                    <i class="fas fa-check-circle"></i>
+                    <span class="arabic-only">تم تقديم طلب الفعالية بنجاح</span>
+                    <span class="english-only">Event submitted successfully</span>
+                </div>
+                
+                <div class="alert alert-error" id="error-alert">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span class="arabic-only">حدث خطأ أثناء التقديم، يرجى المحاولة مرة أخرى</span>
+                    <span class="english-only">An error occurred during submission, please try again</span>
+                </div>
+                
+                <!-- Section I: Create/Manage Event -->
+                <div class="section">
+                    
+                    
+                    
+                    <div class="form-group">
+                        <label for="organizing-university" class="arabic-only">1. الجامعة المنظمة:</label>
+                        <label for="organizing-university" class="english-only">1. Organizing University:</label>
+                        <select id="organizing-university" class="form-control">
+                            <option value="" class="arabic-only">-- اختر الجامعة المنظمة --</option>
+                            <option value="" class="english-only">-- Select Organizing University --</option>
+                            <!-- Data from Excel column A -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="faculty" class="arabic-only">2. الكلية:</label>
+                        <label for="faculty" class="english-only">2. Faculty:</label>
+                        <select id="faculty" class="form-control">
+                            <option value="" class="arabic-only">-- اختر الكلية --</option>
+                            <option value="" class="english-only">-- Select from the list --</option>
+                            <!-- Data from Excel column C and D (Field in EN and AR) -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="laboratory" class="arabic-only">3. المخبر - الجامعة - الرمز: <sub>مرئي فقط لرئيس الفعالية</sub></label>
+                        <label for="laboratory" class="english-only">3. Laboratory - University - Code: <sub>Visible only to the event chair</sub></label>
+                        <select id="laboratory" class="form-control">
+                            <option value="" class="arabic-only">-- اختر المخبر --</option>
+                            <option value="" class="english-only">-- Select from the list --</option>
+                            <!-- Data from Excel column E and F -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="arabic-only">4. نوع الفعالية:</label>
+                        <label class="english-only">4. Type of Event:</label>
+                        <div class="radio-group" id="event-type-group">
+                            <div class="radio-item" data-value="international">
+                                <input type="radio" id="international" name="event-type" value="international">
+                                <label for="international" class="arabic-only">دولية</label>
+                                <label for="international" class="english-only">International</label>
+                            </div>
+                            <div class="radio-item" data-value="national">
+                                <input type="radio" id="national" name="event-type" value="national">
+                                <label for="national" class="arabic-only">وطنية</label>
+                                <label for="national" class="english-only">National</label>
+                            </div>
+                            <div class="radio-item" data-value="study-day">
+                                <input type="radio" id="study-day" name="event-type" value="study-day">
+                                <label for="study-day" class="arabic-only">يوم دراسي</label>
+                                <label for="study-day" class="english-only">Study Day</label>
+                            </div>
+                            <div class="radio-item" data-value="book">
+                                <input type="radio" id="book" name="event-type" value="book">
+                                <label for="book" class="arabic-only">كتاب جماعي/محكم</label>
+                                <label for="book" class="english-only">Collective/Edited Book</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="arabic-only">5. نمط الحضور:</label>
+                        <label class="english-only">5. Mode of Attendance:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="in-person" name="attendance-mode" value="in-person" checked>
+                                <label for="in-person" class="arabic-only">حضوري</label>
+                                <label for="in-person" class="english-only">In person</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="online" name="attendance-mode" value="online">
+                                <label for="online" class="arabic-only">عن بعد</label>
+                                <label for="online" class="english-only">Online (remote)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="hybrid" name="attendance-mode" value="hybrid">
+                                <label for="hybrid" class="arabic-only">مختلط (حضوري وعن بعد)</label>
+                                <label for="hybrid" class="english-only">Hybrid (in person & online)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="conference-title" class="arabic-only">6. عنوان المؤتمر:</label>
+                        <label for="conference-title" class="english-only">6. Conference Title:</label>
+                        <input type="text" id="conference-title" class="form-control" placeholder="المواد المتقدمة للتنمية المستدامة...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="foreword" class="arabic-only">7. رفع المقدمة/التمهيد:</label>
+                        <label for="foreword" class="english-only">7. Upload Foreword/Preface:</label>
+                        <div class="file-upload">
+                            <input type="file" id="foreword" class="file-input" accept=".pdf">
+                            <button class="file-btn" id="foreword-btn">
+                                <i class="fas fa-file-pdf"></i>
+                                <span class="arabic-only">اختر ملف PDF</span>
+                                <span class="english-only">Choose PDF File</span>
+                            </button>
+                            <span class="file-name" id="foreword-name">
+                                <span class="arabic-only">لم يتم اختيار ملف</span>
+                                <span class="english-only">No file chosen</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="submission-deadline" class="arabic-only">8. الموعد النهائي للتقديم:</label>
+                        <label for="submission-deadline" class="english-only">8. Final Submission Deadline:</label>
+                        <input type="date" id="submission-deadline" class="form-control date-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notification-date" class="arabic-only">9. تاريخ الإشعار بالقرارات:</label>
+                        <label for="notification-date" class="english-only">9. Notification Date for Submissions:</label>
+                        <input type="date" id="notification-date" class="form-control date-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="event-date" class="arabic-only">10. تاريخ الفعالية:</label>
+                        <label for="event-date" class="english-only">10. Event Date:</label>
+                        <input type="date" id="event-date" class="form-control date-input" value="2024-09-15">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="template" class="arabic-only">11. قالب العرض:</label>
+                        <label for="template" class="english-only">11. Presentation Template:</label>
+                        <div class="file-upload">
+                            <input type="file" id="template" class="file-input" accept=".doc,.docx">
+                            <button class="file-btn" id="template-btn">
+                                <i class="fas fa-file-word"></i>
+                                <span class="arabic-only">اختر قالب Word</span>
+                                <span class="english-only">Choose Word Template</span>
+                            </button>
+                            <span class="file-name" id="template-name">
+                                <span class="arabic-only">لم يتم اختيار ملف</span>
+                                <span class="english-only">No file chosen</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" id="submit-event">
+                        <span class="arabic-only">إرسال للموافقة</span>
+                        <span class="english-only">SUBMIT FOR APPROVAL</span>
+                    </button>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <!-- Section II: Scientific Committee Decision -->
+                <div class="section decision-section">
+                    <h3 class="section-title arabic-only">
+                        <i class="fas fa-clipboard-check"></i> قرار اللجنة العلمية والمستندات <sub>(يتم تعبئته بعد المراجعة)</sub>
+                    </h3>
+                    <h3 class="section-title english-only">
+                        <i class="fas fa-clipboard-check"></i> Scientific Committee Decision & Documents <sub>(To be completed after review)</sub>
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="arabic-only">13. قرار اللجنة العلمية:</label>
+                        <label class="english-only">13. Scientific Committee Decision:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="accepted" name="decision" value="accepted">
+                                <label for="accepted" class="arabic-only">مقبول</label>
+                                <label for="accepted" class="english-only">Accepted</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="accepted-revisions" name="decision" value="accepted-revisions">
+                                <label for="accepted-revisions" class="arabic-only">مقبول مع تعديلات</label>
+                                <label for="accepted-revisions" class="english-only">Accepted with revisions</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="rejected" name="decision" value="rejected">
+                                <label for="rejected" class="arabic-only">مرفوض</label>
+                                <label for="rejected" class="english-only">Rejected</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rejection-reason" class="arabic-only">السبب (إذا كان مرفوضاً):</label>
+                        <label for="rejection-reason" class="english-only">Reason (if rejected):</label>
+                        <textarea id="rejection-reason" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="arabic-only">14. تحميل:</label>
+                        <label class="english-only">14. Download:</label>
+                        <div style="margin-top: 10px;">
+                            <a href="#" class="download-btn" id="download-certificate">
+                                <i class="fas fa-download"></i> 
+                                <span class="arabic-only">شهادة المشاركة</span>
+                                <span class="english-only">Certificate of Participation</span>
+                            </a>
+                            <a href="#" class="download-btn" id="download-program">
+                                <i class="fas fa-download"></i> 
+                                <span class="arabic-only">برنامج الفعالية مختوم</span>
+                                <span class="english-only">Stamped Event Program</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <!-- Section III: Search Archive -->
+                <div class="search-section">
+                    <h3 class="arabic-only" style="color: var(--primary); margin-bottom: 15px;">
+                        <i class="fas fa-search"></i> البحث في أرشيف الفعاليات (للباحثين)
+                    </h3>
+                    <h3 class="english-only" style="color: var(--primary); margin-bottom: 15px;">
+                        <i class="fas fa-search"></i> Search the Event Archive (For Researchers)
+                    </h3>
+                    
+                    <div class="search-form">
+                        <div class="form-group search-input">
+                            <input type="text" class="form-control arabic-only" placeholder="مثال: الذكاء الاصطناعي، علوم المواد..." id="search-keyword">
+                            <input type="text" class="form-control english-only" placeholder="e.g., Artificial Intelligence, Materials Science..." id="search-keyword-en">
+                        </div>
+                        <button class="search-btn" id="search-button"><i class="fas fa-search"></i> <span class="arabic-only">بحث</span><span class="english-only">Search</span></button>
+                    </div>
+                    
+                    <div class="filters">
+                        <div class="form-group filter-item">
+                            <label for="specialty" class="arabic-only">حسب التخصص:</label>
+                            <label for="specialty" class="english-only">By Specialty:</label>
+                            <select id="specialty" class="form-control">
+                                <option value="" class="arabic-only">-- اختر التخصص --</option>
+                                <option value="" class="english-only">-- Select Specialty --</option>
+                                <!-- Data from Excel column C (Field in EN) -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group filter-item">
+                            <label for="university" class="arabic-only">حسب الجامعة:</label>
+                            <label for="university" class="english-only">By University:</label>
+                            <select id="university" class="form-control">
+                                <option value="" class="arabic-only">-- اختر الجامعة --</option>
+                                <option value="" class="english-only">-- Select University --</option>
+                                <!-- Data from Excel column A -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group filter-item">
+                            <label for="date-search" class="arabic-only">حسب التاريخ:</label>
+                            <label for="date-search" class="english-only">By Date:</label>
+                            <input type="month" id="date-search" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="arabic-only">المنصة الجزائرية للفعاليات العلمية (APSE) - وزارة التعليم العالي والبحث العلمي الجزائرية</p>
+            <p class="english-only">Algerian Platform for Scientific Events (APSE) - Ministry of Higher Education and Scientific Research Algeria</p>
+            <p>© 2024 جميع الحقوق محفوظة / All rights reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // البيانات الكاملة من ملف Excel
+        const universities = [
+            "20th August 1955 University of Skikda",
+            "8th May 1945 University of Guelma",
+            "Abbas Laghrour University of Khenchela",
+            "Abdelhamid Ibn Badis University of Mostaganem",
+            "Abdelhamid Mehri University of Constantine 2",
+            "Abderrahmane Mira University of Bejaia",
+            "Abou Bekr Belkaid University of Tlemcen",
+            "Abou El Kacem Saadallah University of Algiers 2",
+            "Ahmed Ben Bella University of Oran 1 (Es Senia)",
+            "Ahmed Draïa University of Adrar",
+            "Akli Mohand Oulhadj University of Bouira",
+            "Al-Ghofrane Higher Institute of Arts and Languages – Ghardaia",
+            "Amar Telidji University of Laghouat",
+            "Badji Mokhtar University of Annaba",
+            "Benyoucef Benkhedda University of Algiers 1",
+            "Brahim Soltane Chaibout University of Algiers 3",
+            "Business School – Algiers",
+            "Business School – Tizi Ouzou",
+            "Chadli Bendjedid University of El Tarf",
+            "Djilali Bounaama University of Khemis Miliana",
+            "Djillali Liabès University of Sidi Bel Abbès",
+            "Dr Moulay Tahar University of Saïda",
+            "École Normale Supérieure – Setif",
+            "École Normale Supérieure (Teacher Training) – Bouzaréah",
+            "École Normale Supérieure (Teacher Training) – Kouba",
+            "École Normale Supérieure (Teacher Training) – Laghouat",
+            "École Normale Supérieure of Letters and Human Sciences – Constantine",
+            "Emir Abdelkader University for Islamic Sciences – Constantine",
+            "Ferhat Abbas University of Setif 1",
+            "Frères Mentouri University of Constantine 1",
+            "Graduate School of Business Studies",
+            "Hadj Lakhdar University of Batna 1",
+            "Hamma Lakhdar University of El Oued",
+            "Hassiba Ben Bouali University of Chlef",
+            "Higher Institute of Human and Applied Sciences – Ghardaia",
+            "Higher Institute of Management – Algiers",
+            "Higher Institute of Sciences – Algiers",
+            "Higher Institute of Trade and Economics – Setif",
+            "Higher School – Béchar",
+            "Higher School – Bousaada",
+            "Higher School – Mostaganem",
+            "Higher School – Oran",
+            "Higher School – Ouargla",
+            "Higher School of Accounting and Finance – Constantine",
+            "Higher School of Advanced Technologies",
+            "Higher School of Agricultural Sciences – Mostaganem",
+            "Higher School of Applied Sciences – Tlemcen",
+            "Higher School of Biological Sciences – Oran",
+            "Higher School of Business Administration – Tlemcen",
+            "Higher School of Commerce – Mujahid Mouloud Kacem Nait Belkacem",
+            "Higher School of Computer Science – Sidi Bel Abbes",
+            "Higher School of Computer Science and IT – Bejaia",
+            "Higher School of Construction Professions – Algiers",
+            "Higher School of Economics – Oran",
+            "Higher School of Electrical and Energy Engineering – Oran",
+            "Higher School of Food Science and Agro-Food Industries",
+            "Higher School of Management and Digital Economy",
+            "Higher School of Management Sciences – Annaba",
+            "Higher School of Science and Technology – Algiers",
+            "Ibn Khaldoun University of Tiaret",
+            "Ibn Rushd Higher Institute of Science and Technology",
+            "INSIM Business School – Algiers",
+            "Institute of Optics – Bordj Bou Arréridj",
+            "Institute of Optics – Ouled Fayet (Algiers)",
+            "Kasdi Merbah University of Ouargla",
+            "Lamine Debaghine University of Setif 2",
+            "Larbi Ben M’hidi University of Oum El Bouaghi",
+            "Larbi Tebessi University of Tebessa",
+            "Lounici Ali University of Blida 2",
+            "M’Hamed Bougara University of Boumerdes",
+            "Mohamed Bachir El Ibrahimi University of Bordj Bou Arréridj",
+            "Mohamed Ben Ahmed University of Oran 2 (El A’raed Si Moussa)",
+            "Mohamed Boudiaf University of M’Sila",
+            "Mohamed Khider University of Biskra",
+            "Mohamed Seddik Ben Yahia University of Jijel",
+            "Mohamed-Cherif Messaadia University of Souk Ahras",
+            "Mouloud Mammeri University of Tizi-Ouzou",
+            "Multidisciplinary School of Architecture and Urban Engineering – Mujahid Hocine Aït Ahmed",
+            "Mustapha Ben Boulaïd University of Batna 2",
+            "Mustapha Stambouli University of Mascara",
+            "National Higher School of Agronomy – Mujahid Khalef Abdallah (Kasdi Merbah)",
+            "National Higher School of Artificial Intelligence",
+            "National Higher School of Autonomous Systems",
+            "National Higher School of Biotechnology – Constantine",
+            "National Higher School of Computer Science",
+            "National Higher School of Cybersecurity",
+            "National Higher School of Forestry – Khenchela",
+            "National Higher School of Irrigation – Mujahid Arbaoui Abdallah",
+            "National Higher School of Journalism and Information Sciences",
+            "National Higher School of Management",
+            "National Higher School of Marine Sciences and Coastal Management",
+            "National Higher School of Mathematics",
+            "National Higher School of Nanoscience and Nanotechnology",
+            "National Higher School of Political Science",
+            "National Higher School of Public Works – Francis Johnson",
+            "National Higher School of Renewable Energies, Environment and Sustainable Development",
+            "National Higher School of Saharan Agriculture – Adrar",
+            "National Higher School of Saharan Agriculture – El Oued",
+            "National Higher School of Statistics and Applied Economics",
+            "National Higher School of Technology and Engineering – Annaba",
+            "National Higher Veterinary School – Martyr Rabie Boucheama",
+            "National Polytechnic School",
+            "National Polytechnic School – Constantine (Malek Bennabi)",
+            "National Polytechnic School – Oran (Maurice Audin)",
+            "National Specialized School for the Deaf and Mute",
+            "Normal Higher School for Technological Education – Skikda",
+            "Numidia Institute of Technology – Sidi Abdallah (Algiers)",
+            "Saad Dahlab University of Blida 1",
+            "Salah Boubnider University of Constantine 3",
+            "Tahri Mohamed University of Béchar",
+            "Training Institute in Insurance and Management – Algiers",
+            "Training School in Management Techniques – Algiers",
+            "University Center – Aflou",
+            "University Center – Brika",
+            "University Center – El Bayadh",
+            "University Center – Illizi",
+            "University Center – Maghnia",
+            "University Center – Mila",
+            "University Center – Naama",
+            "University Center – Tindouf",
+            "University Center – Tipaza",
+            "University of Ain Temouchent",
+            "University of Continuing Education (UFC)",
+            "University of Ghardaia",
+            "University of Relizane",
+            "University of Science and Technology Houari Boumediene (USTHB)",
+            "University of Science and Technology Mohamed Boudiaf of Oran (USTO-MB)",
+            "University of Tamanrasset",
+            "University of Tissemsilt",
+            "Yahia Fares University of Medea",
+            "Ziane Achour University of Djelfa"
+        ];
+
+        const faculties = [
+            {en: "Sciences and Technologies", ar: "علوم وتكنولوجيا"},
+            {en: "Sciences of Matter", ar: "علوم المادة"},
+            {en: "Mathematics and Computer Science", ar: "رياضيات واعلام آلي"},
+            {en: "Natural and Life Sciences", ar: "علوم الطبيعة والحياة"},
+            {en: "Earth and Universe Sciences", ar: "علوم الأرض والكون"},
+            {en: "Economic, Commercial and Management Sciences", ar: "علوم اقتصادية، والتسيير وعلوم تجارية"},
+            {en: "Law and Political Science", ar: "حقوق وعلوم سياسية"},
+            {en: "Letters and Foreign Languages", ar: "آداب ولغات أجنبية"},
+            {en: "Human and Social Sciences", ar: "علوم إنسانية واجتماعية"},
+            {en: "Sciences and Techniques of Physical and Sports Activities (STAPS)", ar: "علوم وتقنيات النشاطات البدنية والرياضية"},
+            {en: "Arts", ar: "فنون"},
+            {en: "Arabic Language and Literature", ar: "لغة وأدب عربي"},
+            {en: "Amazigh Language and Culture", ar: "لغة وثقافة أمازيغية"},
+            {en: "Architecture, Urban Planning and City Professions", ar: "هندسة معمارية،عمران ومهن المدينة"},
+            {en: "Health Sciences", ar: "علوم الصحة"}
+        ];
+
+        const laboratories = [
+            {name: "مخبر العلوم الأساسية والتطبيقية", university: "Ecole Nationale Polytechnique d'Alger", code: "C2261400"},
+            {name: "مخبر الرياضيات والفيزياء التطبيقية", university: "Ecole normale supérieure de Bou Saâda", code: "E3150200"},
+            {name: "مخبر تعليمية العلوم الفيزيائية والكيميائية وتطبيقاتها", university: "Ecole Normale Supérieure de Constantine", code: "E2830500"},
+            {name: "مخبر العلوم التطبيقية والتعليمية", university: "Ecole Normale Supérieure de Laghouat", code: "C3960200"},
+            {name: "مخبر العلوم التطبيقية", university: "Ecole Supérieure des Sciences Appliquées d'Alger", code: "C4360100"},
+            {name: "مخبر الإعلام الآلي والتكنولوجيات المتقدمة في الرقمنة", university: "Ecole Supérieure en Sciences et Technologies de l'Informatique et du Numérique de Béjaia", code: "C4460100"},
+            {name: "مخبر الهندسة والتنمية المستدامة", university: "Université de Aïn Témouchent", code: "W1360800"},
+            {name: "مخبر علوم المواد والبيئة", university: "Université d'Alger 1 - Benyoucef Benkhedda", code: "C1464500"},
+            {name: "مخبر شبكات، برمجيات والأداء", university: "Université de Biskra - Mohamed Khider", code: "E1363600"},
+            {name: "مخبر الرؤية وأنظمة الاتصال", university: "Université de Biskra - Mohamed Khider", code: "E1363700"}
+            // يمكن إضافة المزيد من المخابر هنا
+        ];
+
+        // تعبئة القوائم المنسدلة
+        function populateSelect(selectId, data, isLab = false) {
+            const select = document.getElementById(selectId);
+            select.innerHTML = '';
+            
+            // إضافة الخيار الافتراضي
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            if (document.body.classList.contains('english')) {
+                defaultOption.textContent = isLab ? '-- Select from the list --' : '-- Select --';
+            } else {
+                defaultOption.textContent = isLab ? '-- اختر من القائمة --' : '-- اختر --';
+            }
+            select.appendChild(defaultOption);
+            
+            // إضافة البيانات
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = typeof item === 'string' ? item : item.en;
+                
+                if (typeof item === 'string') {
+                    option.textContent = item;
+                } else if (isLab) {
+                    option.textContent = `${item.name} - ${item.university} - ${item.code}`;
+                } else {
+                    option.textContent = document.body.classList.contains('english') ? 
+                        item.en : `${item.en} - ${item.ar}`;
+                }
+                
+                select.appendChild(option);
+            });
+        }
+
+        // Language switching functionality
+        document.getElementById('arabic-btn').addEventListener('click', function() {
+            document.body.classList.remove('english');
+            document.body.classList.add('arabic');
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // تحديث القوائم المنسدلة
+            populateSelect('organizing-university', universities);
+            populateSelect('faculty', faculties);
+            populateSelect('laboratory', laboratories, true);
+            populateSelect('specialty', faculties);
+            populateSelect('university', universities);
+        });
+        
+        document.getElementById('english-btn').addEventListener('click', function() {
+            document.body.classList.remove('arabic');
+            document.body.classList.add('english');
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // تحديث القوائم المنسدلة
+            populateSelect('organizing-university', universities);
+            populateSelect('faculty', faculties);
+            populateSelect('laboratory', laboratories, true);
+            populateSelect('specialty', faculties);
+            populateSelect('university', universities);
+        });
+        
+        // File upload functionality
+        document.getElementById('foreword-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('foreword').click();
+        });
+        
+        document.getElementById('template-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('template').click();
+        });
+        
+        document.getElementById('foreword').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 
+                (document.body.classList.contains('english') ? 'No file chosen' : 'لم يتم اختيار ملف');
+            document.getElementById('foreword-name').textContent = fileName;
+        });
+        
+        document.getElementById('template').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 
+                (document.body.classList.contains('english') ? 'No file chosen' : 'لم يتم اختيار ملف');
+            document.getElementById('template-name').textContent = fileName;
+        });
+        
+        // Radio button styling
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // إزالة التحديد من جميع العناصر في المجموعة
+                const groupName = this.getAttribute('name');
+                document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+                    r.parentElement.classList.remove('selected');
+                });
+                
+                // إضافة التحديد للعنصر المختار
+                this.parentElement.classList.add('selected');
+            });
+        });
+        
+        // Download functionality
+        document.getElementById('download-certificate').addEventListener('click', function(e) {
+            e.preventDefault();
+            // في التطبيق الحقيقي، سيتم تحميل ملف حقيقي
+            alert(document.body.classList.contains('english') ? 
+                'Certificate download would start in a real application' : 
+                'سيبدأ تحميل الشهادة في التطبيق الحقيقي');
+        });
+        
+        document.getElementById('download-program').addEventListener('click', function(e) {
+            e.preventDefault();
+            // في التطبيق الحقيقي، سيتم تحميل ملف حقيقي
+            alert(document.body.classList.contains('english') ? 
+                'Program download would start in a real application' : 
+                'سيبدأ تحميل البرنامج في التطبيق الحقيقي');
+        });
+        
+        // Form submission
+        document.getElementById('submit-event').addEventListener('click', function() {
+            // التحقق من الحقول المطلوبة
+            const university = document.getElementById('organizing-university').value;
+            const faculty = document.getElementById('faculty').value;
+            const lab = document.getElementById('laboratory').value;
+            const eventType = document.querySelector('input[name="event-type"]:checked');
+            const title = document.getElementById('conference-title').value;
+            
+            if (!university || !faculty || !lab || !eventType || !title) {
+                document.getElementById('error-alert').style.display = 'block';
+                document.getElementById('success-alert').style.display = 'none';
+            } else {
+                document.getElementById('success-alert').style.display = 'block';
+                document.getElementById('error-alert').style.display = 'none';
+            }
+        });
+        
+        // Search functionality
+        document.getElementById('search-button').addEventListener('click', function() {
+            const keyword = document.body.classList.contains('english') ? 
+                document.getElementById('search-keyword-en').value : 
+                document.getElementById('search-keyword').value;
+            const specialty = document.getElementById('specialty').value;
+            const university = document.getElementById('university').value;
+            const date = document.getElementById('date-search').value;
+            
+            // في التطبيق الحقيقي، سيتم إجراء البحث هنا
+            alert(document.body.classList.contains('english') ? 
+                `Searching for: ${keyword || 'any keyword'}, Specialty: ${specialty || 'any'}, University: ${university || 'any'}, Date: ${date || 'any'}` : 
+                `البحث عن: ${keyword || 'أي كلمة مفتاحية'}, التخصص: ${specialty || 'أي'}, الجامعة: ${university || 'أي'}, التاريخ: ${date || 'أي'}`);
+        });
+        
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعبئة القوائم المنسدلة
+            populateSelect('organizing-university', universities);
+            populateSelect('faculty', faculties);
+            populateSelect('laboratory', laboratories, true);
+            populateSelect('specialty', faculties);
+            populateSelect('university', universities);
+            
+            // تعيين التاريخ الحالي كقيمة افتراضية للحقول
+            const today = new Date();
+            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+            const nextTwoMonths = new Date(today.getFullYear(), today.getMonth() + 2, today.getDate());
+            
+            document.getElementById('submission-deadline').valueAsDate = nextMonth;
+            document.getElementById('notification-date').valueAsDate = nextTwoMonths;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>APSE – Bilingual Registration</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="flag-bg">
+    <div class="container">
+      <header class="banner">
+  <div class="brand">
+<img src="assets/LOGO_APSE.png" alt="APSE Logo"
+     onerror="this.outerHTML='<small style=&quot;color:#b91c1c&quot;>Logo not found: assets/LOGO_APSE.png</small>'">
+    <div class="titles">
+      <h1 class="header-text">People’s Democratic Republic of Algeria</h1>
+      <h2 class="header-text">Ministry of Higher Education and Scientific Research</h2>
+      <h3 class="header-text">Algerian Platform for Scientific Events (APSE)</h3>
+    </div>
+  </div>
+</header>
+
+
+
+
+      <form id="regForm">
+        <div class="row">
+          <label id="label-last">Last Name:</label>
+          <input type="text" placeholder="DEKKICHE" required>
+        </div>
+        <div class="row">
+          <label id="label-first">First Name:</label>
+          <input type="text" placeholder="Djamal" required>
+        </div>
+        <div class="row">
+          <label id="label-email">Email:</label>
+          <input type="email" placeholder="dekkiche27@hotmail.fr" required>
+        </div>
+        <div class="row">
+          <label id="label-pass">Create a Password:</label>
+          <input type="password" required>
+        </div>
+        <div class="row">
+          <label id="label-pass2">Confirm Your Password:</label>
+          <input type="password" required>
+        </div>
+
+        <div class="row">
+          <label id="label-profile">Profile:</label>
+          <select required>
+            <option>Student</option>
+            <option>Teacher</option>
+            <option>Researcher</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        
+
+        
+        <div class="row">
+  <label id="label-field">Field / Discipline:</label>
+  <select id="field" required>
+    <option disabled selected>— Select —</option>
+    <option>Sciences and Technologies / علوم وتكنولوجيا</option>
+    <option>Sciences of Matter / علوم المادة</option>
+    <option>Mathematics and Computer Science / رياضيات وإعلام آلي</option>
+    <option>Natural and Life Sciences / علوم الطبيعة والحياة</option>
+    <option>Earth and Universe Sciences / علوم الأرض والكون</option>
+    <option>Economic, Commercial and Management Sciences / علوم اقتصادية، التسيير وعلوم تجارية</option>
+    <option>Law and Political Science / حقوق وعلوم سياسية</option>
+    <option>Letters and Foreign Languages / آداب ولغات أجنبية</option>
+    <option>Human and Social Sciences / علوم إنسانية واجتماعية</option>
+    <option>Sciences and Techniques of Physical and Sports Activities (STAPS) / علوم وتقنيات النشاطات البدنية والرياضية</option>
+    <option>Arts / فنون</option>
+    <option>Arabic Language and Literature / لغة وأدب عربي</option>
+    <option>Amazigh Language and Culture / لغة وثقافة أمازيغية</option>
+    <option>Architecture, Urban Planning and City Professions / هندسة معمارية، عمران ومهن المدينة</option>
+    <option>Health Sciences / علوم الصحة</option>
+  </select>
+</div>
+<div class="row">
+  <label id="label-univ">University Affiliation:</label>
+  <select id="university" required>
+    <option disabled selected>— Select —</option>
+    <option>University of Science and Technology Houari Boumediene (USTHB) / جامعة العلوم والتكنولوجيا – هواري بومدين</option>
+    <option>Abou Bekr Belkaid University of Tlemcen / جامعة أبو بكر بلقايد – تلمسان</option>
+    <option>Benyoucef Benkhedda University of Algiers 1 / جامعة الجزائر 1 – بن يوسف بن خدة</option>
+    <option>Akli Mohand Oulhadj University of Bouira / جامعة البويرة – آكلي محند أولحاج</option>
+    <option>Ziane Achour University of Djelfa / جامعة الجلفة – زيان عاشور</option>
+    <option>University of Ghardaia / جامعة غرداية</option>
+    <option>University of Mostaganem / جامعة عبد الحميد بن باديس – مستغانم</option>
+    <option>University of Oran 1 / جامعة أحمد بن بلة – وهران 1</option>
+    <option>University of Setif 1 / جامعة سطيف 1 – فرحات عباس</option>
+    <option>University of Constantine 1 / جامعة قسنطينة 1 – الإخوة منتوري</option>
+    <option>University of Algiers 3 / جامعة الجزائر 3 – إبراهيم سلطان شيبوط</option>
+    <option>University of Medea / جامعة المدية – يحي فارس</option>
+    <option>University of Laghouat / جامعة الأغواط – عمار ثليجي</option>
+    <option>University of Biskra / جامعة بسكرة – محمد خيضر</option>
+    <option>University of Ouargla / جامعة ورقلة – قاصدي مرباح</option>
+    <option>University of Batna 1 / جامعة باتنة 1 – الحاج لخضر</option>
+    <option>University of Bejaia / جامعة بجاية – عبد الرحمن ميرة</option>
+    <option>University of Annaba / جامعة عنابة – باجي مختار</option>
+    <option>University of Tlemcen / جامعة تلمسان</option>
+    <option>University of Blida 1 / جامعة البليدة 1 – سعد دحلب</option>
+  </select>
+</div>
+
+        <div class="row">
+          <label id="label-grade">Grade:</label>
+          <select required>
+            <option>Professor</option>
+            <option>Associate Professor (Class A)</option>
+            <option>Associate Professor (Class B)</option>
+            <option>Assistant Professor (Class A)</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="row">
+  <label id="label-country">Country:</label>
+  <select id="country" required>
+    <option disabled selected>— Select —</option>
+    <option>Algeria / الجزائر</option>
+    <option>France / فرنسا</option>
+    <option>Morocco / المغرب</option>
+    <option>Tunisia / تونس</option>
+    <option>Egypt / مصر</option>
+    <option>United Kingdom / المملكة المتحدة</option>
+    <option>United States / الولايات المتحدة الأمريكية</option>
+    <option>Germany / ألمانيا</option>
+    <option>Turkey / تركيا</option>
+    <option>China / الصين</option>
+    <option>Italy / إيطاليا</option>
+    <option>Spain / إسبانيا</option>
+    <option>Canada / كندا</option>
+    <option>Russia / روسيا</option>
+    <option>Saudi Arabia / السعودية</option>
+    <option>India / الهند</option>
+    <option>Brazil / البرازيل</option>
+    <option>Japan / اليابان</option>
+    <option>South Korea / كوريا الجنوبية</option>
+    <option>South Africa / جنوب أفريقيا</option>
+    <option>Qatar / قطر</option>
+    <option>Jordan / الأردن</option>
+    <option>Lebanon / لبنان</option>
+    <option>UAE / الإمارات العربية المتحدة</option>
+    <option>Kuwait / الكويت</option>
+    <option>Oman / عمان</option>
+    <option>Yemen / اليمن</option>
+    <option>Sudan / السودان</option>
+    <option>Nigeria / نيجيريا</option>
+    <option>Kenya / كينيا</option>
+    <option>Ethiopia / إثيوبيا</option>
+    <option>Argentina / الأرجنتين</option>
+    <option>Sweden / السويد</option>
+    <option>Norway / النرويج</option>
+    <option>Denmark / الدنمارك</option>
+    <option>Finland / فنلندا</option>
+    <option>Portugal / البرتغال</option>
+    <option>Netherlands / هولندا</option>
+    <option>Belgium / بلجيكا</option>
+    <option>Switzerland / سويسرا</option>
+    <option>Greece / اليونان</option>
+    <option>Austria / النمسا</option>
+    <option>Poland / بولندا</option>
+    <option>Czech Republic / التشيك</option>
+    <option>Serbia / صربيا</option>
+    <option>Mexico / المكسيك</option>
+    <option>Indonesia / إندونيسيا</option>
+    <option>Pakistan / باكستان</option>
+    <option>Bangladesh / بنغلاديش</option>
+    <option>Malaysia / ماليزيا</option>
+    <option>Singapore / سنغافورة</option>
+    <option>Vietnam / فيتنام</option>
+    <option>Philippines / الفلبين</option>
+    <option>Thailand / تايلاند</option>
+    <option>Iran / إيران</option>
+    <option>Iraq / العراق</option>
+    <option>Syria / سوريا</option>
+    <option>Palestine / فلسطين</option>
+  </select>
+</div>
+
+        <!-- CAPTCHA -->
+<div class="row">
+  <label id="label-captcha">Confirm you are not a robot</label>
+  <div class="captcha-line">
+    <div class="captcha-box" id="captcha-box">U3Fcv3</div>
+    <button type="button" id="refresh-captcha">↻</button>
+    <input id="captcha-input" type="text" placeholder="type the code" required />
+  </div>
+</div>
+<!-- SUBMIT BUTTON -->
+<div class="row submit-row">
+  <button type="submit" class="submit-btn">CREATE AN ACCOUNT</button>
+</div>
+

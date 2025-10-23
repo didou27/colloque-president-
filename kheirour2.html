@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <!-- مهم للموبايل: يمنع التكبير التلقائي ويجعل العرض بعرض الشاشة -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المنصة الجزائرية للتظاهرات العلمية - APSE</title>
+
+  <style>
+    :root{
+      --primary:#006633;
+      --secondary:#d21034;
+      --bg:#f9f9f9;
+      --text:#333;
+      --card:#fff;
+      --border:#e5e7eb;
+    }
+
+    /* ====== إعدادات أساسية (Mobile-first) ====== */
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:"Segoe UI",Tahoma,Verdana,Arial,sans-serif; line-height:1.6; }
+    .container{ width:100%; max-width:1100px; margin-inline:auto; padding:12px; }
+
+    header{ background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.08); position:relative; }
+    .header-text{ text-align:center; padding-top:56px; } /* مساحة لمبدّل اللغة الثابت */
+    .header-text h1{ margin:6px 0; color:var(--primary); font-size:clamp(18px, 4vw, 24px); }
+    .header-text h2{ margin:6px 0; color:var(--secondary); font-size:clamp(16px, 3.5vw, 20px); }
+    .green-text{ color:var(--primary) !important; font-weight:700; }
+    .brand-big{ font-size:clamp(28px, 9vw, 60px); font-weight:900; color:#000; }
+
+    /* مبدّل اللغة – ثابت أعلى اليسار ولا يغطي المحتوى */
+    .language-switcher{
+      position:fixed; inset-block-start:10px; inset-inline-start:10px; z-index:1000;
+      display:inline-flex; gap:6px; padding:6px; border:1px solid var(--border); border-radius:999px;
+      background:#ffffffcc; backdrop-filter:blur(4px);
+    }
+    .language-switcher button{
+      border:0; padding:8px 12px; border-radius:999px; font-size:14px; cursor:pointer; background:transparent;
+    }
+    .language-switcher button.active{ background:#16a34a; color:#fff; font-weight:600; }
+    .language-switcher button:not(.active):hover{ background:#f3f4f6; }
+
+    /* بطاقة النموذج */
+    .registration-form{
+      background:var(--card); border-radius:10px; padding:18px;
+      box-shadow:0 2px 10px rgba(0,0,0,.08); margin:16px auto;
+    }
+    .form-title{ text-align:center; margin-bottom:16px; color:var(--primary); border-bottom:1px solid var(--border); padding-bottom:8px; }
+
+    .form-row{ display:flex; flex-wrap:wrap; gap:12px; }
+    .form-group{ flex:1 1 240px; min-width:0; }
+    label{ display:block; margin:0 0 6px; font-weight:600; }
+    .required::after{ content:" *"; color:var(--secondary); }
+    input,select{
+      width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; font-size:16px; background:#fff;
+    }
+
+    .radio-group{ display:flex; flex-wrap:wrap; gap:12px; }
+    .radio-option{ display:flex; align-items:center; gap:6px; }
+
+    .submit-btn{
+      background:var(--primary); color:#fff; border:0; padding:12px 18px; font-size:16px;
+      border-radius:10px; cursor:pointer; display:block; margin:14px auto 0; transition:filter .2s;
+      width:min(280px, 100%);
+    }
+    .submit-btn:hover{ filter:brightness(.95); }
+
+    /* كابتشا */
+    .captcha-section{
+      background:#fafafa; border:1px solid var(--border); border-radius:10px; padding:14px; margin:16px 0;
+    }
+    #captchaCanvas{ width:100%; height:64px; display:block; border:1px dashed var(--border); border-radius:8px; background:#fff; }
+
+    /* ====== تحسينات للشاشات الأوسع ====== */
+    @media (min-width:768px){
+      .container{ padding:20px; }
+      .registration-form{ padding:24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language switcher -->
+  <div class="language-switcher">
+    <button id="arabicBtn" class="active">العربية</button>
+    <button id="englishBtn">English</button>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="header-text">
+        <h1>الجمهورية الجزائرية الديمقراطية الشعبية</h1>
+        <h1>People's Democratic Republic of Algeria</h1>
+
+        <h2 class="green-text">وزارة التعليم العالي والبحث العلمي</h2>
+        <h2 class="green-text">Ministry of Higher Education and Scientific Research</h2>
+
+        <h2 style="font-size:clamp(20px,6vw,32px); font-weight:900; color:#000;">المنصة الجزائرية للتظاهرات العلمية</h2>
+        <h2 style="font-size:clamp(20px,6vw,32px); font-weight:900; color:#000;">Algerian Platform for Scientific Events</h2>
+        <h2 class="brand-big">- APSE -</h2>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="registration-form">
+      <!-- Arabic Form -->
+      <form id="arabicForm" class="form-content" novalidate>
+        <h2 class="form-title">إنشاء حساب</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lastNameAr" class="required">اللقب</label>
+            <input type="text" id="lastNameAr" placeholder="دقيش" required>
+          </div>
+          <div class="form-group">
+            <label for="firstNameAr" class="required">الاسم</label>
+            <input type="text" id="firstNameAr" placeholder="جمال" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="emailAr" class="required">البريد الإلكتروني</label>
+          <input type="email" id="emailAr" placeholder="name@example.com" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="passwordAr" class="required">كلمة السر</label>
+            <input type="password" id="passwordAr" placeholder="••••••••••" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPasswordAr" class="required">تأكيد كلمة السر</label>
+            <input type="password" id="confirmPasswordAr" placeholder="••••••••••" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="required">الدرجة العلمية</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="profileAr" value="professor" required> أستاذ جامعي</label>
+            <label class="radio-option"><input type="radio" name="profileAr" value="researcher"> باحث أكاديمي</label>
+            <label class="radio-option"><input type="radio" name="profileAr" value="student"> طالب</label>
+            <label class="radio-option"><input type="radio" name="profileAr" value="other"> أخرى</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fieldAr" class="required">الميدان</label>
+          <select id="fieldAr" required>
+            <option value="">اختر الميدان</option>
+            <option value="sciences-technologies">علوم وتكنولوجيا</option>
+            <option value="sciences-of-matter">علوم المادة</option>
+            <option value="mathematics-computer-science">رياضيات واعلام آلي</option>
+            <option value="natural-life-sciences">علوم الطبيعة والحياة</option>
+            <option value="earth-universe-sciences">علوم الأرض والكون</option>
+            <option value="economic-commercial-management-sciences">علوم اقتصادية، والتسيير وعلوم تجارية</option>
+            <option value="law-political-science">حقوق وعلوم سياسية</option>
+            <option value="letters-foreign-languages">آداب ولغات أجنبية</option>
+            <option value="human-social-sciences">علوم إنسانية واجتماعية</option>
+            <option value="staps">علوم وتقنيات النشاطات البدنية والرياضية</option>
+            <option value="arts">فنون</option>
+            <option value="arabic-language-literature">لغة وأدب عربي</option>
+            <option value="amazigh-language-culture">لغة وثقافة أمازيغية</option>
+            <option value="architecture-urban-planning-city-professions">هندسة معمارية،عمران ومهن المدينة</option>
+            <option value="health-sciences">علوم الصحة</option>
+          </select>
+        </div>
+
+        <!-- الجامعات + خانة للأجانب -->
+        <div class="form-group">
+          <label for="universitySelect" class="required">الجامعة / University</label>
+          <select id="universitySelect" required>
+            <option value="">{ اختر / Select }</option>
+            <option value="univ-skikda-20081955" data-en="20th August 1955 University of Skikda">جامعة 20 أوت 1955 سكيكدة</option>
+            <option value="univ-bouira-akli-mohand-oulhadj" data-en="Akli Mohand Oulhadj University of Bouira">جامعة البويرة – آكلي محند أولحاج</option>
+            <option value="univ-djelfa-ziane-achour" data-en="Ziane Achour University of Djelfa">جامعة الجلفة – زيان عاشور</option>
+            <option value="univ-ghardaia" data-en="University of Ghardaia">جامعة غرداية</option>
+            <option value="univ-khemis-miliana-djilali-bounaama" data-en="Djilali Bounaama University of Khemis Miliana">جامعة خميس مليانة – الجيلالي بونعامة</option>
+            <option value="univ-media-yahia-fares" data-en="Yahia Fares University of Médéa">جامعة المدية – يحي فارس</option>
+            <option value="usthb" data-en="University of Science and Technology Houari Boumediene (USTHB)">جامعة الجزائر هواري بومدين للعلوم و التكنولوجيا</option>
+            <option value="univ-bejaia-abderrahmane-mira" data-en="Abderrahmane Mira University of Béjaïa">جامعة بجاية – عبد الرحمان ميرة</option>
+            <option value="univ-boumerdes-mohamed-bougara" data-en="M’hamed Bougara University of Boumerdès">جامعة بومرداس – محمد بوقرة</option>
+            <option value="univ-tizi-ouzou-mouloud-mammeri" data-en="Mouloud Mammeri University of Tizi-Ouzou">جامعة تيزي وزو – مولود معمري</option>
+            <!-- … (أكمل بقيّة القائمة بنفس النمط) … -->
+          </select>
+        </div>
+
+        <div class="form-group" id="foreignUniversityGroup" style="display:none;">
+          <label for="foreignUniversity">اسم الجامعة (للدول الأجنبية) / University name (if foreign)</label>
+          <input id="foreignUniversity" type="text" placeholder="اكتب اسم جامعتك / Type your university name">
+        </div>
+
+        <!-- CAPTCHA (canvas يستجيب للموبايل) -->
+        <div class="captcha-section">
+          <p style="margin:0 0 6px">Confirm that you are not a robot</p>
+          <p id="captchaCodeLabel" style="margin:0 0 8px">Code: <strong id="captchaRaw">U3Fcv3</strong></p>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <canvas id="captchaCanvas" height="70"></canvas>
+            <button type="button" id="captchaRefresh" title="Refresh CAPTCHA" style="padding:10px 12px; border:1px solid var(--border); border-radius:8px; background:#f3f4f6; cursor:pointer;">↻</button>
+          </div>
+          <input id="captchaInput" type="text" placeholder="Enter the code above" required style="margin-top:8px;">
+          <div id="captchaMsg" aria-live="polite" style="margin-top:6px; font-weight:700;"></div>
+        </div>
+
+        <button type="submit" class="submit-btn">إنشاء حساب</button>
+      </form>
+
+      <!-- English form (hidden by default) -->
+      <form id="englishForm" class="form-content" style="display:none" novalidate>
+        <h2 class="form-title">Create an Account</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lastNameEn" class="required">Last Name</label>
+            <input type="text" id="lastNameEn" placeholder="DOE" required>
+          </div>
+          <div class="form-group">
+            <label for="firstNameEn" class="required">First Name</label>
+            <input type="text" id="firstNameEn" placeholder="John" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="emailEn" class="required">Email</label>
+          <input type="email" id="emailEn" placeholder="name@example.com" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="passwordEn" class="required">Create a Password</label>
+            <input type="password" id="passwordEn" placeholder="••••••••••" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPasswordEn" class="required">Confirm Your Password</label>
+            <input type="password" id="confirmPasswordEn" placeholder="••••••••••" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="required">Profile</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="profileEn" value="teacher" required> Teacher</label>
+            <label class="radio-option"><input type="radio" name="profileEn" value="researcher"> Researcher</label>
+            <label class="radio-option"><input type="radio" name="profileEn" value="student"> Student</label>
+            <label class="radio-option"><input type="radio" name="profileEn" value="other"> Other</label>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    /* تبديل اللغة (يزيد قابلية الاستخدام على الهاتف) */
+    (function(){
+      const arBtn = document.getElementById('arabicBtn');
+      const enBtn = document.getElementById('englishBtn');
+      const arForm = document.getElementById('arabicForm');
+      const enForm = document.getElementById('englishForm');
+
+      function setLang(lang){
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang==='ar') ? 'rtl' : 'ltr';
+        arBtn.classList.toggle('active', lang==='ar');
+        enBtn.classList.toggle('active', lang==='en');
+        arForm.style.display = (lang==='ar') ? '' : 'none';
+        enForm.style.display = (lang==='en') ? '' : 'none';
+
+        // بدّل نص الجامعات بين العربية والإنجليزية
+        const sel = document.getElementById('universitySelect');
+        if(sel){
+          Array.from(sel.options).forEach(opt=>{
+            if(!opt.dataset) return;
+            if(!opt.dataset.ar) opt.dataset.ar = opt.textContent.trim();
+            if(lang==='en' && opt.dataset.en){ opt.textContent = opt.dataset.en; }
+            else { opt.textContent = opt.dataset.ar; }
+          });
+        }
+      }
+
+      arBtn.addEventListener('click', ()=>setLang('ar'));
+      enBtn.addEventListener('click', ()=>setLang('en'));
+      setLang(document.documentElement.lang || 'ar');
+    })();
+
+    /* إظهار خانة "جامعة أجنبية" لغير الجزائر */
+    (function(){
+      const foreignGroup = document.getElementById('foreignUniversityGroup');
+      const countryAr = document.getElementById('countryAr');
+      const countryEn = document.getElementById('countryEn');
+      function bind(sel){
+        if(!sel) return;
+        const toggle=()=>{
+          const v=(sel.value||'').toLowerCase();
+          foreignGroup && (foreignGroup.style.display = (v && v!=='algeria') ? '' : 'none');
+        };
+        sel.addEventListener('change',toggle); toggle();
+      }
+      bind(countryAr); bind(countryEn);
+    })();
+
+    /* CAPTCHA – جعل الـ canvas يتمدد بعرض الجوال */
+    (function(){
+      const canvas = document.getElementById('captchaCanvas');
+      const ctx = canvas.getContext('2d');
+      const rawEl = document.getElementById('captchaRaw');
+      const refreshBtn = document.getElementById('captchaRefresh');
+      const input = document.getElementById('captchaInput');
+      const msg = document.getElementById('captchaMsg');
+      const CHARSET = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+      const LENGTH = 6;
+      let currentCode = 'U3Fcv3';
+
+      function randInt(n){ return Math.floor(Math.random()*n); }
+      function randRange(a,b){ return a + Math.random()*(b-a); }
+
+      function makeCode(len=LENGTH){
+        let s=''; for(let i=0;i<len;i++) s += CHARSET[randInt(CHARSET.length)];
+        return s;
+      }
+
+      function fitCanvas(){
+        // اجعل العرض يساوي العرض CSS (للجوال)
+        const cssWidth = canvas.clientWidth || 280;
+        canvas.width = Math.max(220, Math.floor(cssWidth));
+        render(currentCode);
+      }
+
+      function drawBackground(){
+        const w=canvas.width, h=canvas.height;
+        const g=ctx.createLinearGradient(0,0,w,h);
+        g.addColorStop(0,'#fff'); g.addColorStop(1,'#f7fbff');
+        ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+        for(let i=0;i<8;i++){
+          ctx.beginPath(); ctx.moveTo(randInt(w),randInt(h)); ctx.lineTo(randInt(w),randInt(h));
+          ctx.strokeStyle=`rgba(${randInt(120)},${randInt(160)},${randInt(200)},0.12)`;
+          ctx.lineWidth=randRange(.6,1.6); ctx.stroke();
+        }
+      }
+
+      function drawCode(code){
+        const w=canvas.width, h=canvas.height, baseline=h/2+6;
+        const palette=['#0ea5e9','#22c55e','#ef4444','#a855f7','#f59e0b','#06b6d4','#f97316'];
+        const gap = w/(code.length+1);
+        ctx.textBaseline='middle';
+        for(let i=0;i<code.length;i++){
+          const ch=code[i], fs=Math.round(randRange(26,34));
+          ctx.font = `${fs}px "Segoe UI", Arial, sans-serif`;
+          const x = gap*(i+1)+randRange(-6,6), y = baseline+randRange(-6,6), a=randRange(-0.35,0.35);
+          ctx.save(); ctx.translate(x,y); ctx.rotate(a);
+          ctx.fillStyle = palette[randInt(palette.length)];
+          ctx.shadowColor='rgba(0,0,0,.08)'; ctx.shadowBlur=2;
+          ctx.fillText(ch, -ctx.measureText(ch).width/2, 0);
+          ctx.restore();
+        }
+      }
+
+      function render(code){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        drawBackground(); drawCode(code);
+      }
+
+      function refresh(){
+        currentCode = makeCode(); rawEl.textContent=currentCode; render(currentCode);
+        input.value=''; msg.textContent='';
+      }
+
+      refreshBtn.addEventListener('click', refresh);
+      window.addEventListener('resize', fitCanvas, {passive:true});
+
+      // init
+      fitCanvas(); rawEl.textContent=currentCode; setTimeout(refresh, 250);
+
+      // expose verify if you need it
+      window.captchaVerify = function(){
+        const typed=(input.value||'').replace(/\s+/g,'');
+        if(!typed){ msg.textContent=''; return false; }
+        if(typed===currentCode){ msg.textContent='Verified ✅'; msg.style.color='#15803d'; return true; }
+        msg.textContent='Invalid code — try again.'; msg.style.color='#b91c1c'; return false;
+      };
+    })();
+
+    /* إرسال النموذج (تجريبي) */
+    (function(){
+      document.querySelectorAll('form').forEach(f=>{
+        f.addEventListener('submit', e=>{
+          e.preventDefault();
+          alert('Form submitted successfully!');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

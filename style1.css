@@ -1,0 +1,130 @@
+.captcha-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.captcha-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.captcha-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.captcha-code {
+    font-family: 'Courier New', monospace;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #006633, #d21034);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.captcha-instruction {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.captcha-input-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.captcha-input {
+    flex: 1;
+    max-width: 200px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.verify-btn {
+    background-color: #006633;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.verify-btn:hover {
+    background-color: #004d26;
+}
+.language-switcher {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.language-switcher button {
+    background: none;
+    border: 1px solid var(--primary-color);
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.language-switcher button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.language-switcher button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+header {
+    background-color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative; /* إضافة هذه الخاصية */
+}
+.green-text {
+  color: #006633;
+  font-weight: 700;
+}
+.language-switcher button {
+  background-color: pink;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.language-switcher button:hover {
+  background-color: #ffb6c1; /* lighter pink on hover */
+}
+
+.language-switcher button.active {
+  background-color: #ff69b4; /* hot pink for active button */
+  color: white;
+}
+

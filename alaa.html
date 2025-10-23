@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>APSE – Bilingual Registration</title>
+  <!-- SheetJS (XLSX) via CDN: allows parsing Excel without npm/build tools -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    :root{
+      --apse-red:#d7263d; /* brand accent */
+      --apse-green:#0f9d58; /* Algeria green */
+      --apse-blue:#1e88e5; /* secondary accent */
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --ring:rgba(30,136,229,.25);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background:var(--bg); color:var(--text);
+      display:flex; align-items:flex-start; justify-content:center; padding:32px;
+    }
+    .container{width:min(1100px, 100%);}
+    .banner{
+      background:linear-gradient(120deg, var(--apse-green), var(--apse-blue));
+      color:#fff; padding:24px; border-radius:var(--radius);
+      display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    .brand{
+      display:flex; gap:14px; align-items:center;
+    }
+    .logo{
+      width:56px; height:56px; border-radius:12px; background:#fff; display:grid; place-items:center; color:var(--apse-red); font-weight:800; font-size:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,.15);
+    }
+    .title{line-height:1.2}
+    .title h1{margin:0; font-size:18px; letter-spacing:.2px}
+    .title h2{margin:2px 0 0; font-size:14px; font-weight:600; opacity:.95}
+    .lang-toggle{
+      display:flex; gap:8px; align-items:center;
+      background:#fff2; padding:6px; border-radius:999px;
+    }
+    .lang-toggle button{
+      border:0; padding:8px 14px; border-radius:999px; background:#ffffff; color:#0b1020; cursor:pointer; font-weight:700;
+      box-shadow:0 1px 6px rgba(0,0,0,.15);
+    }
+    .lang-toggle button[aria-pressed="true"]{ background:var(--apse-red); color:#fff; }
+
+    .grid{
+      margin-top:18px; display:grid; grid-template-columns: 1.15fr .85fr; gap:18px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      background:var(--card); border-radius:var(--radius); padding:22px; box-shadow:0 8px 24px rgba(0,0,0,.08);
+    }
+    .card h3{margin:0 0 14px; font-size:18px}
+    .muted{color:var(--muted)}
+
+    form{ display:grid; gap:14px; }
+    .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width:720px){ .row{ grid-template-columns:1fr; } }
+
+    label{font-size:13px; font-weight:700; margin-bottom:4px; display:block}
+    input[type="text"], input[type="email"], input[type="password"], select{
+      width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:12px; background:#fff; color:#111827;
+      outline:none; transition:.2s border, .2s box-shadow;
+    }
+    input:focus, select:focus{
+      border-color:var(--apse-blue); box-shadow:0 0 0 4px var(--ring);
+    }
+
+    .roles{ display:flex; gap:10px; flex-wrap:wrap; }
+    .chip{
+      display:flex; align-items:center; gap:8px; border:1px solid #e5e7eb; border-radius:999px; padding:8px 12px; background:#fff; cursor:pointer;
+    }
+    .chip input{ accent-color:var(--apse-red); }
+
+    .captcha{
+      display:flex; align-items:center; gap:12px;
+    }
+    .captcha-box{
+      font-family:monospace; letter-spacing:6px; font-weight:800; font-size:20px; background:#111827; color:#fff; padding:10px 14px; border-radius:10px;
+    }
+    .captcha button{ padding:8px 12px; border-radius:10px; border:0; background:var(--apse-blue); color:#fff; cursor:pointer; }
+
+    .actions{ display:flex; gap:10px; align-items:center; justify-content:flex-end; margin-top:8px; }
+    .btn{
+      border:0; padding:12px 18px; border-radius:12px; font-weight:800; cursor:pointer;
+    }
+    .btn.primary{ background:var(--apse-red); color:#fff; }
+    .btn.secondary{ background:#111827; color:#fff; }
+
+    .rtl{ direction:rtl; }
+    .req{ color:var(--apse-red); margin-inline-start:4px; }
+
+    .small{ font-size:12px; color:var(--muted); }
+    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background:#eee; padding:2px 6px; border-radius:6px; }
+
+    .pill{ display:inline-block; padding:2px 8px; border-radius:999px; background:#efefef; font-size:12px; margin-inline-start:6px; }
+
+    .footer-note{margin-top:10px; font-size:12px; color:var(--muted);}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="banner" id="banner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">APSE</div>
+        <div class="title">
+          <h1 id="head-line-1">People’s Democratic Republic of Algeria</h1>
+          <h2 id="head-line-2">Ministry of Higher Education and Scientific Research · Algerian Platform for Scientific Events (APSE)</h2>
+        </div>
+      </div>
+      <div class="lang-toggle" role="group" aria-label="language switch">
+        <button type="button" id="btn-en" aria-pressed="true">English</button>
+        <button type="button" id="btn-ar" aria-pressed="false">العربية</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3 id="form-title">Create Your Account</h3>
+        <p class="muted small" id="form-sub">Fields marked <span class="req">*</span> are required.</p>
+
+        <!-- Excel loader -->
+        <details>
+          <summary><strong id="excel-title">Load Excel to auto-fill dropdowns (universities, fields, countries)</strong></summary>
+          <p class="small" id="excel-help">Choose an .xlsx file. The first sheet should have columns like: <span class="kbd">University EN</span>, <span class="kbd">University AR</span>, <span class="kbd">Field EN</span>, <span class="kbd">Field AR</span>, <span class="kbd">Country EN</span>, <span class="kbd">Country AR</span>. Flexible header matching is enabled.</p>
+          <input type="file" id="excelFile" accept=".xlsx,.xls" />
+          <div class="footer-note" id="excel-note">No server required. Parsing happens locally in your browser.</div>
+        </details>
+
+        <form id="regForm" novalidate>
+          <div class="row">
+            <div>
+              <label id="label-last">Last Name <span class="req">*</span></label>
+              <input id="lastName" name="lastName" type="text" required placeholder="Bennacer" />
+            </div>
+            <div>
+              <label id="label-first">First Name <span class="req">*</span></label>
+              <input id="firstName" name="firstName" type="text" required placeholder="Lamia" />
+            </div>
+          </div>
+
+          <div>
+            <label id="label-email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" required placeholder="name@univ-dz.dz" />
+          </div>
+
+          <div class="row">
+            <div>
+              <label id="label-pass">Create a Password <span class="req">*</span></label>
+              <input id="password" name="password" type="password" required />
+            </div>
+            <div>
+              <label id="label-pass2">Confirm Your Password <span class="req">*</span></label>
+              <input id="password2" name="password2" type="password" required />
+            </div>
+          </div>
+
+          <div>
+            <label id="label-profile">Profile <span class="req">*</span> <span class="pill" id="required-pill">Required</span></label>
+            <div class="roles" role="group" aria-labelledby="label-profile">
+              <label class="chip"><input type="radio" name="role" value="student" required /> <span id="role-student">Student</span></label>
+              <label class="chip"><input type="radio" name="role" value="teacher" /> <span id="role-teacher">Teacher</span></label>
+              <label class="chip"><input type="radio" name="role" value="researcher" /> <span id="role-researcher">Researcher</span></label>
+              <label class="chip"><input type="radio" name="role" value="other" /> <span id="role-other">Other</span></label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label id="label-field">Field / Discipline <span class="req">*</span></label>
+              <select id="field" required>
+                <option value="" selected disabled>—</option>
+              </select>
+            </div>
+            <div>
+              <label id="label-univ">University Affiliation <span class="req">*</span></label>
+              <select id="university" required>
+                <option value="" selected disabled>—</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label id="label-grade">Grade <span class="req">*</span></label>
+              <select id="grade" required>
+                <option value="" selected disabled>—</option>
+              </select>
+            </div>
+            <div>
+              <label id="label-country">Country <span class="req">*</span></label>
+              <select id="country" required>
+                <option value="" selected disabled>—</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label id="label-captcha">Confirm you are not a robot</label>
+            <div class="captcha">
+              <div class="captcha-box" id="captcha-box">U3Fcv3</div>
+              <button type="button" id="refresh-captcha">↻</button>
+              <input id="captcha-input" type="text" placeholder="Type the code" required />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="submit" id="submitBtn">SUBMIT</button>
+          </div>
+        </form>
+      </div>
+
+      
+        
+
+  <script>
+    // ———————————— Bilingual strings
+    const i18n = {
+      en:{
+        head1:"People’s Democratic Republic of Algeria",
+        head2:"Ministry of Higher Education and Scientific Research · Algerian Platform for Scientific Events (APSE)",
+        formTitle:"Create Your Account",
+        formSub:"Fields marked * are required.",
+        excelTitle:"Load Excel to auto-fill dropdowns (universities, fields, countries)",
+        excelHelp:"Choose an .xlsx file. The first sheet should have columns like: University EN, University AR, Field EN, Field AR, Country EN, Country AR. Flexible header matching is enabled.",
+        excelNote:"No server required. Parsing happens locally in your browser.",
+        last:"Last Name", first:"First Name", email:"Email", pass:"Create a Password", pass2:"Confirm Your Password",
+        profile:"Profile", required:"Required", student:"Student", teacher:"Teacher", researcher:"Researcher", other:"Other",
+        field:"Field / Discipline", univ:"University Affiliation", grade:"Grade", country:"Country",
+        notRobot:"Confirm you are not a robot", typeCode:"Type the code",
+        submit:"SUBMIT", preview:"Preview JSON",
+        helpTitle:"How to use (VS Code)",
+        helpSteps:[
+          "Open VS Code → create a folder like apse-form → save this file as index.html.",
+          "Install the VS Code extension Live Server. Right-click index.html → Open with Live Server.",
+          "Click Load Excel to import your official tables; dropdowns will auto-populate in both languages.",
+          "No backend is included; on submit we show a preview JSON and save to localStorage. You can later connect a server (Node/PHP) to POST the payload.",
+        ],
+        schemaTitle:"Expected Excel headers",
+        schemaItems:["University EN, University AR","Field EN, Field AR","Country EN, Country AR","(Optional) Grade EN, Grade AR"],
+        schemaNote:"Header matching is case-insensitive and tolerant (e.g., 'Field (EN)' will match).",
+        uiTitle:"Branding", uiNote:"Colors use Algeria green + APSE red + blue accent. Edit them in the :root CSS variables.",
+      },
+      ar:{
+        head1:"الجمهورية الجزائرية الديمقراطية الشعبية",
+        head2:"وزارة التعليم العالي والبحث العلمي · المنصة الجزائرية للفعاليات العلمية (APSE)",
+        formTitle:"إنشاء حساب جديد",
+        formSub:"الحقول المعلَّمة بـ * إلزامية.",
+        excelTitle:"تحميل ملف Excel لملء القوائم تلقائيًا (جامعات، ميادين، دول)",
+        excelHelp:"اختر ملف .xlsx. يجب أن تحتوي الورقة الأولى على أعمدة مثل: University EN, University AR, Field EN, Field AR, Country EN, Country AR. المطابقة مرنة ولا تراعي حالة الأحرف.",
+        excelNote:"لا حاجة إلى خادم. تتم المعالجة محليًا على متصفحك.",
+        last:"اللقب", first:"الاسم", email:"البريد الإلكتروني", pass:"إنشاء كلمة المرور", pass2:"تأكيد كلمة المرور",
+        profile:"الصفة", required:"إلزامي", student:"طالب", teacher:"أستاذ", researcher:"باحث", other:"أخرى",
+        field:"الميدان / التخصص", univ:"الانتماء الجامعي", grade:"الرتبة", country:"الدولة",
+        notRobot:"أكد أنك لست روبوتًا", typeCode:"أدخل الرمز",
+        submit:"تسجيل", preview:"معاينة JSON",
+        helpTitle:"طريقة الاستعمال (VS Code)",
+        helpSteps:[
+          "افتح VS Code → أنشئ مجلدًا باسم apse-form → احفظ هذا الملف باسم index.html.",
+          "ثبّت إضافة Live Server ثم انقر يمينًا على index.html → Open with Live Server.",
+          "انقر تحميل Excel لاستيراد الجداول الرسمية؛ سيتم ملء القوائم تلقائيًا باللغتين.",
+          "لا يوجد خادم خلفي؛ عند الإرسال نعرض معاينة JSON ونحفظ البيانات محليًا. يمكنك لاحقًا ربط خادم لاستقبال الطلب.",
+        ],
+        schemaTitle:"رؤوس الأعمدة المتوقعة في Excel",
+        schemaItems:["University EN, University AR","Field EN, Field AR","Country EN, Country AR","(اختياري) Grade EN, Grade AR"],
+        schemaNote:"مطابقة الرؤوس لا تراعي حالة الأحرف وتتحمل اختلافات بسيطة (مثل Field (EN)).",
+        uiTitle:"الهوية البصرية", uiNote:"الألوان: الأخضر الجزائري + الأحمر (APSE) مع لمسة زرقاء. يمكن تعديلها ضمن متغيرات :root في CSS.",
+      }
+    };
+
+    let currentLang = 'en';
+    const $ = (s)=>document.querySelector(s);
+
+    function setLang(lang){
+      currentLang = lang;
+      const L = i18n[lang];
+      $('#btn-en').setAttribute('aria-pressed', lang==='en');
+      $('#btn-ar').setAttribute('aria-pressed', lang==='ar');
+
+      document.documentElement.lang = lang;
+      const rtl = lang==='ar';
+      document.body.classList.toggle('rtl', rtl);
+
+      // Headings
+      $('#head-line-1').textContent = L.head1;
+      $('#head-line-2').textContent = L.head2;
+
+      // Form labels
+      $('#form-title').textContent = L.formTitle;
+      $('#form-sub').innerHTML = (lang==='en')? 'Fields marked <span class="req">*</span> are required.' : 'الحقول المعلَّمة بـ <span class="req">*</span> إلزامية.';
+
+      $('#excel-title').textContent = L.excelTitle;
+      $('#excel-help').textContent = L.excelHelp;
+      $('#excel-note').textContent = L.excelNote;
+
+      $('#label-last').textContent = L.last + ' *';
+      $('#label-first').textContent = L.first + ' *';
+      $('#label-email').textContent = L.email + ' *';
+      $('#label-pass').textContent = L.pass + ' *';
+      $('#label-pass2').textContent = L.pass2 + ' *';
+      $('#label-profile').innerHTML = `${L.profile} <span class="req">*</span> <span class="pill" id="required-pill">${L.required}</span>`;
+      $('#role-student').textContent = L.student;
+      $('#role-teacher').textContent = L.teacher;
+      $('#role-researcher').textContent = L.researcher;
+      $('#role-other').textContent = L.other;
+
+      $('#label-field').innerHTML = `${L.field} <span class="req">*</span>`;
+      $('#label-univ').innerHTML = `${L.univ} <span class="req">*</span>`;
+      $('#label-grade').innerHTML = `${L.grade} <span class="req">*</span>`;
+      $('#label-country').innerHTML = `${L.country} <span class="req">*</span>`;
+
+      $('#label-captcha').textContent = L.notRobot;
+      $('#captcha-input').placeholder = L.typeCode;
+
+      $('#submitBtn').textContent = L.submit;
+      $('#previewBtn').textContent = L.preview;
+
+      $('#help-title').textContent = L.helpTitle;
+      const steps = L.helpSteps.map(s=>`<li>${s}</li>`).join('');
+      $('#help-steps').innerHTML = steps;
+
+      $('#schema-title').textContent = L.schemaTitle;
+      $('#schema-list').innerHTML = L.schemaItems.map(s=>`<li><span class="small">${s}</span></li>`).join('');
+      $('#schema-note').textContent = L.schemaNote;
+
+      $('#ui-title').textContent = L.uiTitle;
+      $('#ui-note').textContent = L.uiNote;
+
+      // Re-render selects for bilingual options
+      renderSelectOptions();
+    }
+
+    // ———————————— Basic datasets (fallback if no Excel is loaded)
+    const fallbackData = {
+      fields:[
+  {en:"Sciences and Technologies", ar:"علوم وتكنولوجيا"},
+  {en:"Sciences of Matter", ar:"علوم المادة"},
+  {en:"Mathematics and Computer Science", ar:"رياضيات وإعلام آلي"},
+  {en:"Natural and Life Sciences", ar:"علوم الطبيعة والحياة"},
+  {en:"Earth and Universe Sciences", ar:"علوم الأرض والكون"},
+  {en:"Economic, Commercial and Management Sciences", ar:"علوم اقتصادية، التسيير وعلوم تجارية"},
+  {en:"Law and Political Science", ar:"حقوق وعلوم سياسية"},
+  {en:"Letters and Foreign Languages", ar:"آداب ولغات أجنبية"},
+  {en:"Human and Social Sciences", ar:"علوم إنسانية واجتماعية"},
+  {en:"Sciences and Techniques of Physical and Sports Activities (STAPS)", ar:"علوم وتقنيات النشاطات البدنية والرياضية"},
+  {en:"Arts", ar:"فنون"},
+  {en:"Arabic Language and Literature", ar:"لغة وأدب عربي"},
+  {en:"Amazigh Language and Culture", ar:"لغة وثقافة أمازيغية"},
+  {en:"Architecture, Urban Planning and City Professions", ar:"هندسة معمارية، عمران ومهن المدينة"},
+  {en:"Health Sciences", ar:"علوم الصحة"}
+],
+,
+      universities:[
+        {en:"University of Science and Technology Houari Boumediene (USTHB)", ar:"جامعة العلوم والتكنولوجيا – هواري بومدين"},
+        {en:"Abou Bekr Belkaid University of Tlemcen", ar:"جامعة أبو بكر بلقايد – تلمسان"},
+        {en:"University of Algiers 1 – Benyoucef Benkhedda", ar:"جامعة الجزائر 1 – بن يوسف بن خدة"},
+        {en:"Akli Mohand Oulhadj University of Bouira", ar:"جامعة البويرة – آكلي محند أولحاج"},
+      ],
+      grades:[
+        {en:"Professor (Class A)", ar:"أستاذ"},
+        {en:"Associate Professor (Class A) — MCA", ar:"أستاذ محاضر (أ) — م.ق.أ"},
+        {en:"Associate Professor (Class B) — MCB", ar:"أستاذ محاضر (ب) — م.ق.ب"},
+        {en:"Assistant Professor — MA", ar:"أستاذ مساعد — م"},
+        {en:"PhD Student", ar:"طالب دكتوراه"},
+      ],
+      countries:[
+        // Paste this array into fallbackData.countries (or define as const COUNTRIES and assign)
+[
+  {en:"Afghanistan", ar:"أفغانستان"},
+  {en:"Albania", ar:"ألبانيا"},
+  {en:"Algeria", ar:"الجزائر"},
+  {en:"American Samoa", ar:"ساموا الأمريكية"},
+  {en:"Andorra", ar:"أندورا"},
+  {en:"Angola", ar:"أنغولا"},
+  {en:"Anguilla", ar:"أنغويلا"},
+  {en:"Antigua and Barbuda", ar:"أنتيغوا وباربودا"},
+  {en:"Argentina", ar:"الأرجنتين"},
+  {en:"Armenia", ar:"أرمينيا"},
+  {en:"Aruba", ar:"أروبا"},
+  {en:"Australia", ar:"أستراليا"},
+  {en:"Austria", ar:"النمسا"},
+  {en:"Azerbaijan", ar:"أذربيجان"},
+  {en:"Bahamas", ar:"الباهاما"},
+  {en:"Bahrain", ar:"البحرين"},
+  {en:"Bangladesh", ar:"بنغلاديش"},
+  {en:"Barbados", ar:"باربادوس"},
+  {en:"Belarus", ar:"بيلاروس"},
+  {en:"Belgium", ar:"بلجيكا"},
+  {en:"Belize", ar:"بليز"},
+  {en:"Benin", ar:"بنن"},
+  {en:"Bermuda", ar:"برمودا"},
+  {en:"Bhutan", ar:"بوتان"},
+  {en:"Bolivia", ar:"بوليفيا"},
+  {en:"Bosnia and Herzegovina", ar:"البوسنة والهرسك"},
+  {en:"Botswana", ar:"بوتسوانا"},
+  {en:"Brazil", ar:"البرازيل"},
+  {en:"British Virgin Islands", ar:"جزر العذراء البريطانية"},
+  {en:"Brunei", ar:"بروناي"},
+  {en:"Bulgaria", ar:"بلغاريا"},
+  {en:"Burkina Faso", ar:"بوركينا فاسو"},
+  {en:"Burundi", ar:"بوروندي"},
+  {en:"Cabo Verde", ar:"كابو فيردي"},
+  {en:"Cambodia", ar:"كمبوديا"},
+  {en:"Cameroon", ar:"الكاميرون"},
+  {en:"Canada", ar:"كندا"},
+  {en:"Cayman Islands", ar:"جزر كايمان"},
+  {en:"Central African Republic", ar:"جمهورية أفريقيا الوسطى"},
+  {en:"Chad", ar:"تشاد"},
+  {en:"Chile", ar:"تشيلي"},
+  {en:"China", ar:"الصين"},
+  {en:"Colombia", ar:"كولومبيا"},
+  {en:"Comoros", ar:"جزر القمر"},
+  {en:"Congo", ar:"الكونغو"},
+  {en:"Cook Islands", ar:"جزر كوك"},
+  {en:"Costa Rica", ar:"كوستاريكا"},
+  {en:"Côte d'Ivoire", ar:"ساحل العاج"},
+  {en:"Croatia", ar:"كرواتيا"},
+  {en:"Cuba", ar:"كوبا"},
+  {en:"Curaçao", ar:"كوراساو"},
+  {en:"Cyprus", ar:"قبرص"},
+  {en:"Czech Republic", ar:"جمهورية التشيك"},
+  {en:"Democratic Republic of the Congo", ar:"جمهورية الكونغو الديمقراطية"},
+  {en:"Denmark", ar:"الدنمارك"},
+  {en:"Djibouti", ar:"جيبوتي"},
+  {en:"Dominica", ar:"دومينيكا"},
+  {en:"Dominican Republic", ar:"جمهورية الدومينيكان"},
+  {en:"Ecuador", ar:"الإكوادور"},
+  {en:"Egypt", ar:"مصر"},
+  {en:"El Salvador", ar:"السلفادور"},
+  {en:"Equatorial Guinea", ar:"غينيا الاستوائية"},
+  {en:"Eritrea", ar:"إريتريا"},
+  {en:"Estonia", ar:"إستونيا"},
+  {en:"Eswatini", ar:"إسواتيني"},
+  {en:"Ethiopia", ar:"إثيوبيا"},
+  {en:"Faroe Islands", ar:"جزر فارو"},
+  {en:"Fiji", ar:"فيجي"},
+  {en:"Finland", ar:"فنلندا"},
+  {en:"France", ar:"فرنسا"},
+  {en:"French Guiana", ar:"غويانا الفرنسية"},
+  {en:"French Polynesia", ar:"بولينزيا الفرنسية"},
+  {en:"Gabon", ar:"الغابون"},
+  {en:"Gambia", ar:"غامبيا"},
+  {en:"Georgia", ar:"جورجيا"},
+  {en:"Germany", ar:"ألمانيا"},
+  {en:"Ghana", ar:"غانا"},
+  {en:"Gibraltar", ar:"جبل طارق"},
+  {en:"Greece", ar:"اليونان"},
+  {en:"Greenland", ar:"غرينلاند"},
+  {en:"Grenada", ar:"غرينادا"},
+  {en:"Guam", ar:"غوام"},
+  {en:"Guatemala", ar:"غواتيمالا"},
+  {en:"Guinea", ar:"غينيا"},
+  {en:"Guinea-Bissau", ar:"غينيا بيساو"},
+  {en:"Guyana", ar:"غيانا"},
+  {en:"Haiti", ar:"هايتي"},
+  {en:"Honduras", ar:"هندوراس"},
+  {en:"Hong Kong", ar:"هونغ كونغ"},
+  {en:"Hungary", ar:"المجر"},
+  {en:"Iceland", ar:"أيسلندا"},
+  {en:"India", ar:"الهند"},
+  {en:"Indonesia", ar:"إندونيسيا"},
+  {en:"Iran", ar:"إيران"},
+  {en:"Iraq", ar:"العراق"},
+  {en:"Ireland", ar:"أيرلندا"},
+  {en:"Israel", ar:"إسرائيل"},
+  {en:"Italy", ar:"إيطاليا"},
+  {en:"Jamaica", ar:"جامايكا"},
+  {en:"Japan", ar:"اليابان"},
+  {en:"Jordan", ar:"الأردن"},
+  {en:"Kazakhstan", ar:"كازاخستان"},
+  {en:"Kenya", ar:"كينيا"},
+  {en:"Kiribati", ar:"كيريباتي"},
+  {en:"Kosovo", ar:"كوسوفو"},
+  {en:"Kuwait", ar:"الكويت"},
+  {en:"Kyrgyzstan", ar:"قيرغيزستان"},
+  {en:"Laos", ar:"لاوس"},
+  {en:"Latvia", ar:"لاتفيا"},
+  {en:"Lebanon", ar:"لبنان"},
+  {en:"Lesotho", ar:"ليسوتو"},
+  {en:"Liberia", ar:"ليبيريا"},
+  {en:"Libya", ar:"ليبيا"},
+  {en:"Liechtenstein", ar:"ليختنشتاين"},
+  {en:"Lithuania", ar:"ليتوانيا"},
+  {en:"Luxembourg", ar:"لوكسمبورغ"},
+  {en:"Macau", ar:"ماكاو"},
+  {en:"Madagascar", ar:"مدغشقر"},
+  {en:"Malawi", ar:"مالاوي"},
+  {en:"Malaysia", ar:"ماليزيا"},
+  {en:"Maldives", ar:"جزر المالديف"},
+  {en:"Mali", ar:"مالي"},
+  {en:"Malta", ar:"مالطا"},
+  {en:"Marshall Islands", ar:"جزر مارشال"},
+  {en:"Mauritania", ar:"موريتانيا"},
+  {en:"Mauritius", ar:"موريشيوس"},
+  {en:"Mexico", ar:"المكسيك"},
+  {en:"Micronesia", ar:"ميكرونيزيا"},
+  {en:"Moldova", ar:"مولدوفا"},
+  {en:"Monaco", ar:"موناكو"},
+  {en:"Mongolia", ar:"منغوليا"},
+  {en:"Montenegro", ar:"الجبل الأسود"},
+  {en:"Montserrat", ar:"مونتسرات"},
+  {en:"Morocco", ar:"المغرب"},
+  {en:"Mozambique", ar:"موزمبيق"},
+  {en:"Myanmar", ar:"ميانمار"},
+  {en:"Namibia", ar:"ناميبيا"},
+  {en:"Nauru", ar:"ناورو"},
+  {en:"Nepal", ar:"نيبال"},
+  {en:"Netherlands", ar:"هولندا"},
+  {en:"New Caledonia", ar:"كاليدونيا الجديدة"},
+  {en:"New Zealand", ar:"نيوزيلندا"},
+  {en:"Nicaragua", ar:"نيكاراغوا"},
+  {en:"Niger", ar:"النيجر"},
+  {en:"Nigeria", ar:"نيجيريا"},
+  {en:"Niue", ar:"نييوي"},
+  {en:"North Korea", ar:"كوريا الشمالية"},
+  {en:"North Macedonia", ar:"مقدونيا الشمالية"},
+  {en:"Northern Mariana Islands", ar:"جزر ماريانا الشمالية"},
+  {en:"Norway", ar:"النرويج"},
+  {en:"Oman", ar:"عُمان"},
+  {en:"Pakistan", ar:"باكستان"},
+  {en:"Palau", ar:"بالاو"},
+  {en:"Palestine", ar:"فلسطين"},
+  {en:"Panama", ar:"بنما"},
+  {en:"Papua New Guinea", ar:"بابوا غينيا الجديدة"},
+  {en:"Paraguay", ar:"باراغواي"},
+  {en:"Peru", ar:"بيرو"},
+  {en:"Philippines", ar:"الفلبين"},
+  {en:"Poland", ar:"بولندا"},
+  {en:"Portugal", ar:"البرتغال"},
+  {en:"Puerto Rico", ar:"بورتوريكو"},
+  {en:"Qatar", ar:"قطر"},
+  {en:"Romania", ar:"رومانيا"},
+  {en:"Russia", ar:"روسيا"},
+  {en:"Rwanda", ar:"رواندا"},
+  {en:"Saint Kitts and Nevis", ar:"سانت كيتس ونيفيس"},
+  {en:"Saint Lucia", ar:"سانت لوسيا"},
+  {en:"Saint Vincent and the Grenadines", ar:"سانت فنسنت والغرينادين"},
+  {en:"Samoa", ar:"ساموا"},
+  {en:"San Marino", ar:"سان مارينو"},
+  {en:"São Tomé and Príncipe", ar:"ساو تومي وبرينسيب"},
+  {en:"Saudi Arabia", ar:"السعودية"},
+  {en:"Senegal", ar:"السنغال"},
+  {en:"Serbia", ar:"صربيا"},
+  {en:"Seychelles", ar:"سيشل"},
+  {en:"Sierra Leone", ar:"سيراليون"},
+  {en:"Singapore", ar:"سنغافورة"},
+  {en:"Sint Maarten", ar:"سينت مارتن"},
+  {en:"Slovakia", ar:"سلوفاكيا"},
+  {en:"Slovenia", ar:"سلوفينيا"},
+  {en:"Solomon Islands", ar:"جزر سليمان"},
+  {en:"Somalia", ar:"الصومال"},
+  {en:"South Africa", ar:"جنوب أفريقيا"},
+  {en:"South Korea", ar:"كوريا الجنوبية"},
+  {en:"South Sudan", ar:"جنوب السودان"},
+  {en:"Spain", ar:"إسبانيا"},
+  {en:"Sri Lanka", ar:"سريلانكا"},
+  {en:"Sudan", ar:"السودان"},
+  {en:"Suriname", ar:"سورينام"},
+  {en:"Sweden", ar:"السويد"},
+  {en:"Switzerland", ar:"سويسرا"},
+  {en:"Syria", ar:"سوريا"},
+  {en:"Taiwan", ar:"تايوان"},
+  {en:"Tajikistan", ar:"طاجيكستان"},
+  {en:"Tanzania", ar:"تنزانيا"},
+  {en:"Thailand", ar:"تايلاند"},
+  {en:"Timor-Leste", ar:"تيمور الشرقية"},
+  {en:"Togo", ar:"توغو"},
+  {en:"Tonga", ar:"تونغا"},
+  {en:"Trinidad and Tobago", ar:"ترينيداد وتوباغو"},
+  {en:"Tunisia", ar:"تونس"},
+  {en:"Turkey", ar:"تركيا"},
+  {en:"Turkmenistan", ar:"تركمانستان"},
+  {en:"Turks and Caicos Islands", ar:"جزر توركس وكايكوس"},
+  {en:"Tuvalu", ar:"توفالو"},
+  {en:"Uganda", ar:"أوغندا"},
+  {en:"Ukraine", ar:"أوكرانيا"},
+  {en:"United Arab Emirates", ar:"الإمارات العربية المتحدة"},
+  {en:"United Kingdom", ar:"المملكة المتحدة"},
+  {en:"United States", ar:"الولايات المتحدة الأمريكية"},
+  {en:"Uruguay", ar:"الأوروغواي"},
+  {en:"Uzbekistan", ar:"أوزبكستان"},
+  {en:"Vanuatu", ar:"فانواتو"},
+  {en:"Venezuela", ar:"فنزويلا"},
+  {en:"Vietnam", ar:"فيتنام"},
+  {en:"Yemen", ar:"اليمن"},
+  {en:"Zambia", ar:"زامبيا"},
+  {en:"Zimbabwe", ar:"زيمبابوي"}
+]
+
+    
+    };
+
+    const state = {
+      fields:[...fallbackData.fields],
+      universities:[...fallbackData.universities],
+      grades:[...fallbackData.grades],
+      countries:[...fallbackData.countries]
+    };
+
+    function optionLabel(item){ return currentLang==='ar' ? item.ar : item.en; }
+
+    function fillSelect(sel, arr){
+      sel.innerHTML = '<option value="" disabled selected>—</option>' + arr
+        .map(o=>`<option>${optionLabel(o)}</option>`)
+        .join('');
+    }
+
+    function renderSelectOptions(){
+      fillSelect($('#field'), state.fields);
+      fillSelect($('#university'), state.universities);
+      fillSelect($('#grade'), state.grades);
+      fillSelect($('#country'), state.countries);
+    }
+
+    // ———————————— CAPTCHA
+    function randomCaptcha(){
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let s=''; for(let i=0;i<6;i++){ s += chars[Math.floor(Math.random()*chars.length)]; }
+      return s;
+    }
+    function refreshCaptcha(){
+      $('#captcha-box').textContent = randomCaptcha();
+      $('#captcha-input').value='';
+    }
+
+    // ———————————— Excel parsing utilities
+    const headerMap = {
+      univEN:[/univ.*en|university\s*\(en\)|university\s*en/i],
+      univAR:[/univ.*ar|university\s*\(ar\)|university\s*ar/i],
+      fieldEN:[/field.*en|discipline.*en|m[iy]d[ae]n.*en|field\s*\(en\)/i],
+      fieldAR:[/field.*ar|discipline.*ar|m[iy]d[ae]n.*ar|field\s*\(ar\)/i],
+      countryEN:[/country.*en|pays.*en/i],
+      countryAR:[/country.*ar|دولة|الدولة|بلد/i],
+      gradeEN:[/grade.*en|rank.*en/i],
+      gradeAR:[/grade.*ar|الرتبة/i],
+    };
+
+    function findColIndex(headers, regexArr){
+      for(let i=0;i<headers.length;i++){
+        const h = String(headers[i]||'');
+        for(const r of regexArr){ if(r.test(h)) return i; }
+      }
+      return -1;
+    }
+
+    function uniquePush(arr, item){
+      const key = item.en + '||' + item.ar;
+      if(!arr._keys){ arr._keys = new Set(); }
+      if(!arr._keys.has(key)) { arr.push(item); arr._keys.add(key); }
+    }
+
+    function parseExcelToState(ws){
+      const rows = XLSX.utils.sheet_to_json(ws, {header:1, raw:false});
+      if(!rows.length) return;
+      const headers = rows[0];
+      const dataRows = rows.slice(1).filter(r=>r && r.some(c=>String(c||'').trim().length));
+
+      const idx = {
+        univEN: findColIndex(headers, headerMap.univEN),
+        univAR: findColIndex(headers, headerMap.univAR),
+        fieldEN: findColIndex(headers, headerMap.fieldEN),
+        fieldAR: findColIndex(headers, headerMap.fieldAR),
+        countryEN: findColIndex(headers, headerMap.countryEN),
+        countryAR: findColIndex(headers, headerMap.countryAR),
+        gradeEN: findColIndex(headers, headerMap.gradeEN),
+        gradeAR: findColIndex(headers, headerMap.gradeAR),
+      };
+
+      const next = {fields:[], universities:[], countries:[], grades:[]};
+
+      for(const r of dataRows){
+        const uEN = idx.univEN>=0 ? (r[idx.univEN]||'').toString().trim() : '';
+        const uAR = idx.univAR>=0 ? (r[idx.univAR]||'').toString().trim() : '';
+        const fEN = idx.fieldEN>=0 ? (r[idx.fieldEN]||'').toString().trim() : '';
+        const fAR = idx.fieldAR>=0 ? (r[idx.fieldAR]||'').toString().trim() : '';
+        const cEN = idx.countryEN>=0 ? (r[idx.countryEN]||'').toString().trim() : '';
+        const cAR = idx.countryAR>=0 ? (r[idx.countryAR]||'').toString().trim() : '';
+        const gEN = idx.gradeEN>=0 ? (r[idx.gradeEN]||'').toString().trim() : '';
+        const gAR = idx.gradeAR>=0 ? (r[idx.gradeAR]||'').toString().trim() : '';
+
+        if(uEN || uAR) uniquePush(next.universities, {en:uEN||uAR, ar:uAR||uEN});
+        if(fEN || fAR) uniquePush(next.fields, {en:fEN||fAR, ar:fAR||fEN});
+        if(cEN || cAR) uniquePush(next.countries, {en:cEN||cAR, ar:cAR||cEN});
+        if(gEN || gAR) uniquePush(next.grades, {en:gEN||gAR, ar:gAR||gEN});
+      }
+
+      // Replace only if any were found, else keep existing
+      if(next.fields.length) state.fields = next.fields;
+      if(next.universities.length) state.universities = next.universities;
+      if(next.countries.length) state.countries = next.countries;
+      if(next.grades.length) state.grades = next.grades;
+
+      renderSelectOptions();
+      alert(currentLang==='ar' ? 'تم تحميل بيانات Excel وتحديث القوائم.' : 'Excel data loaded and dropdowns updated.');
+    }
+
+    // ———————————— Events
+    $('#btn-en').addEventListener('click', ()=> setLang('en'));
+    $('#btn-ar').addEventListener('click', ()=> setLang('ar'));
+
+    $('#excelFile').addEventListener('change', (e)=>{
+      const file = e.target.files?.[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev)=>{
+        const data = new Uint8Array(ev.target.result);
+        const wb = XLSX.read(data, {type:'array'});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        parseExcelToState(ws);
+      };
+      reader.readAsArrayBuffer(file);
+    });
+
+    $('#refresh-captcha').addEventListener('click', refreshCaptcha);
+
+    $('#previewBtn').addEventListener('click', ()=>{
+      const payload = collectPayload(false);
+      if(!payload) return; // validation failed
+      const pretty = JSON.stringify(payload, null, 2);
+      alert(pretty);
+    });
+
+    $('#regForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const payload = collectPayload(true);
+      if(!payload) return; // validation failed
+      const key = 'APSE_REG_' + Date.now();
+      localStorage.setItem(key, JSON.stringify(payload));
+      alert(currentLang==='ar' ? 'تم الحفظ محليًا. يمكنك الآن ربط خادم لاستقبال الطلب.' : 'Saved locally. You can now connect a backend to receive this payload.');
+      e.target.reset(); refreshCaptcha();
+    });
+
+    function collectPayload(checkCaptcha){
+      // simple validation
+      const pass = $('#password').value.trim();
+      const pass2 = $('#password2').value.trim();
+      if(pass !== pass2){ alert(currentLang==='ar'? 'كلمتا المرور غير متطابقتين':'Passwords do not match'); return null; }
+
+      const captchaOK = $('#captcha-input').value.trim().toUpperCase() === $('#captcha-box').textContent.toUpperCase();
+      if(checkCaptcha && !captchaOK){ alert(currentLang==='ar'? 'رمز التحقق غير صحيح':'CAPTCHA code is incorrect'); return null; }
+
+      const role = [...document.querySelectorAll('input[name="role"]')].find(r=>r.checked)?.value||'';
+
+      // Note: we store both displayed label (bilingual) and current language to ease backend mapping later.
+      const payload = {
+        lang: currentLang,
+        lastName: $('#lastName').value.trim(),
+        firstName: $('#firstName').value.trim(),
+        email: $('#email').value.trim(),
+        role,
+        field: $('#field').value,
+        university: $('#university').value,
+        grade: $('#grade').value,
+        country: $('#country').value,
+        time: new Date().toISOString()
+      };
+
+      // Basic required checks (HTML5 required already helps)
+      for(const k of ['lastName','firstName','email','role','field','university','grade','country']){
+        if(!payload[k]){ alert(currentLang==='ar'? 'يرجى إكمال جميع الحقول المطلوبة':'Please complete all required fields'); return null; }
+      }
+      return payload;
+    }
+
+    // Init
+    setLang('en');
+    renderSelectOptions();
+    refreshCaptcha();
+  </script>
+</body>
+</html>

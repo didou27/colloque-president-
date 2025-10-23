@@ -1,0 +1,270 @@
+:root {
+  --green: #006233;
+  --red: #d21034;
+  --white: #ffffff;
+  --text-dark: #1f2937;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  color: var(--text-dark);
+}
+
+.flag-bg {
+  background: linear-gradient(90deg, var(--green) 33%, var(--white) 34%, var(--red) 67%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+.container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: min(90%, 600px);
+}
+
+.banner {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--red);
+  background: #fff;
+  border-radius: 12px;
+  display: inline-block;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+h1, h2 {
+  margin: 8px 0;
+}
+
+.lang-toggle {
+  margin-top: 16px;
+}
+
+.lang-toggle button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.lang-toggle button.active {
+  background-color: var(--red);
+  color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.submit-btn {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: var(--red);
+}
+
+.captcha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.captcha-box {
+  font-family: monospace;
+  background: var(--text-dark);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 18px;
+  letter-spacing: 4px;
+}
+Confirm you are not a robot
+U3Fcv3
+↻    type the code
+.captcha-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.captcha-box {
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  background: #1f2937;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+#refresh-captcha {
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+#refresh-captcha:hover {
+  background: var(--red);
+}
+
+#captcha-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.submit-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background: var(--green);        /* couleur verte du drapeau */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s background;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.submit-btn:hover {
+  background: var(--red);          /* devient rouge au survol */
+}
+:root {
+  --green: #006233;
+  --red: #d21034;
+  --white: #ffffff;
+}
+.apse-logo {
+  width: 80px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  padding: 6px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, var(--green) 30%, var(--white) 35%, var(--red) 70%);
+  padding: 16px 24px;
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.apse-logo {
+  width: 90px;
+  height: auto;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, #006233 33%, #ffffff 34%, #d21034 67%);
+  padding: 16px 24px;
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.header-text {
+  color: #000000;        /* noir pur */
+  font-weight: 800;      /* gras fort */
+  text-align: center;    /* centré si tu veux */
+  margin: 4px 0;         /* espace uniforme */
+}
+.header-text {
+  color: #000;
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+.apse-logo{ width:90px; height:auto; border-radius:12px; background:#fff; padding:6px; }
+.brand{ display:flex; gap:16px; align-items:center; }
+.green-text {
+  color: #006633;
+  font-weight: 700;
+}
+.language-switcher button {
+  background-color: pink;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.language-switcher button:hover {
+  background-color: #ffb6c1; /* lighter pink on hover */
+}
+
+.language-switcher button.active {
+  background-color: #ff69b4; /* hot pink for active button */
+  color: white;
+}
